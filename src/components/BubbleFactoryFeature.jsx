@@ -117,7 +117,8 @@ export default function BubbleFactoryFeature({ onSelectShow }) {
 
                     <a
                       href="#cotizador"
-                      className="w-full py-2.5 text-center text-xs text-purple-200 hover:text-white font-bold block transition"
+                      onClick={() => onSelectShow && onSelectShow('fabrica-burbujas')}
+                      className="w-full py-2.5 text-center text-xs text-purple-200 hover:text-white font-bold block transition cursor-pointer"
                     >
                       O agrégalo como extra en tu cotización personalizada ↓
                     </a>

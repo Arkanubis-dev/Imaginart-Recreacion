@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Calculator, 
   Sparkles, 
@@ -15,7 +15,8 @@ import {
   Cake,
   Award,
   Theater,
-  FileCheck2
+  FileCheck2,
+  ExternalLink
 } from 'lucide-react';
 import { LEGAL_INFO } from '@/lib/legalContent';
 import { saveQuoteLead } from '@/lib/supabase';
@@ -39,6 +40,7 @@ const GUEST_OPTIONS_LIST = [
 
 export default function InteractiveQuoter({ onOpenLegal, selectedPackageId }) {
   const [step, setStep] = useState(1);
+  const [selectedPlanNotification, setSelectedPlanNotification] = useState('');
 
   const [selectedEventType, setSelectedEventType] = useState(EVENT_TYPES_LIST[0]);
   const [selectedGuest, setSelectedGuest] = useState(GUEST_OPTIONS_LIST[1]);
@@ -56,9 +58,66 @@ export default function InteractiveQuoter({ onOpenLegal, selectedPackageId }) {
   const [legalError, setLegalError] = useState('');
 
   const [submittedSuccess, setSubmittedSuccess] = useState(false);
+  const [lastWhatsAppUrl, setLastWhatsAppUrl] = useState('');
 
   // WhatsApp oficial: 3001250524
   const cleanWhatsAppNumber = LEGAL_INFO.whatsapp.replace(/\D/g, '');
+
+  // Sincronizar selección cuando el usuario hace clic en un plan o show en la página
+  useEffect(() => {
+    if (!selectedPackageId) return;
+
+    if (selectedPackageId === 'plan-basico') {
+      setSelectedEventType(EVENT_TYPES_LIST[0]);
+      setSelectedGuest(GUEST_OPTIONS_LIST[0]);
+      setSelectedExtras(['show-magia']);
+      setSelectedPlanNotification('Plan Lúdico & Pintucaritas ($290.000 COP)');
+      setStep(1);
+    } else if (selectedPackageId === 'plan-intermedio') {
+      setSelectedEventType(EVENT_TYPES_LIST[1]);
+      setSelectedGuest(GUEST_OPTIONS_LIST[1]);
+      setSelectedExtras(['show-magia', 'show-titeres']);
+      setSelectedPlanNotification('Plan Mágico Teatral & Títeres ($420.000 COP)');
+      setStep(1);
+    } else if (selectedPackageId === 'plan-premium') {
+      setSelectedEventType(EVENT_TYPES_LIST[1]);
+      setSelectedGuest(GUEST_OPTIONS_LIST[2]);
+      setSelectedExtras(['fabrica-burbujas', 'luces-humo']);
+      setSelectedPlanNotification('Mega Show Burbujas & Circo ($680.000 COP)');
+      setStep(3); // Llevarlo directo al paso de extras
+    } else if (selectedPackageId === 'fabrica-burbujas' || selectedPackageId === 'burbujas' || selectedPackageId === 'burbujas-show') {
+      setSelectedEventType(EVENT_TYPES_LIST[1]);
+      setSelectedGuest(GUEST_OPTIONS_LIST[1]);
+      if (!selectedExtras.includes('fabrica-burbujas')) {
+        setSelectedExtras((prev) => [...prev, 'fabrica-burbujas']);
+      }
+      setSelectedPlanNotification('Show Estrella "La Fábrica de las Burbujas"');
+      setStep(3);
+    } else if (selectedPackageId === 'circo') {
+      setSelectedEventType(EVENT_TYPES_LIST[1]);
+      setSelectedPlanNotification('Show "Fiesta Infantil de Circo"');
+      setStep(3);
+    } else if (selectedPackageId === 'titeres') {
+      setSelectedEventType(EVENT_TYPES_LIST[1]);
+      if (!selectedExtras.includes('show-titeres')) {
+        setSelectedExtras((prev) => [...prev, 'show-titeres']);
+      }
+      setSelectedPlanNotification('Show "Aventuras en Títeres"');
+      setStep(3);
+    } else if (selectedPackageId === 'conjunto' || selectedPackageId === 'conjuntos') {
+      setSelectedEventType(EVENT_TYPES_LIST[2]);
+      setSelectedGuest(GUEST_OPTIONS_LIST[3]);
+      setSelectedExtras(['inflable-saltarin', 'estacion-crispetas']);
+      setSelectedPlanNotification('Evento para Conjunto Residencial');
+      setStep(1);
+    } else if (selectedPackageId === 'empresa' || selectedPackageId === 'corporativo') {
+      setSelectedEventType(EVENT_TYPES_LIST[3]);
+      setSelectedGuest(GUEST_OPTIONS_LIST[3]);
+      setSelectedExtras(['inflable-saltarin', 'luces-humo']);
+      setSelectedPlanNotification('Evento Corporativo & Empresa');
+      setStep(1);
+    }
+  }, [selectedPackageId]);
 
   const toggleExtra = (id) => {
     if (selectedExtras.includes(id)) {
@@ -86,6 +145,7 @@ export default function InteractiveQuoter({ onOpenLegal, selectedPackageId }) {
   const buildWhatsAppMessage = () => {
     const extrasList = selectedExtras
       .map((id) => ADDONS.find((e) => e.id === id)?.name)
+      .filter(Boolean)
       .join('\n  • ');
 
     return `🎈 *COTIZACIÓN IMAGIN-ART-RECREACIÓN* 🎈
@@ -118,21 +178,27 @@ export default function InteractiveQuoter({ onOpenLegal, selectedPackageId }) {
     if (e) e.preventDefault();
     setLegalError('');
 
-    if (!name.trim() || !phone.trim()) {
-      setLegalError('Por favor ingresa tu Nombre y número de WhatsApp para entregarte la cotización.');
+    if (!name.trim()) {
+      setLegalError('Por favor ingresa tu Nombre completo para la cotización.');
+      return;
+    }
+
+    if (!phone.trim()) {
+      setLegalError('Por favor ingresa tu número de WhatsApp para poder contactarte.');
       return;
     }
 
     if (!acceptedHabeasData) {
-      setLegalError('Debes marcar la casilla obligatoria: "Acepto la Política de Tratamiento de Datos Personales" (Ley 1581 de 2012).');
+      setLegalError('Debes marcar la casilla: "Acepto la Política de Tratamiento de Datos Personales" (Ley 1581 de 2012).');
       return;
     }
 
     if (!acceptedTerms) {
-      setLegalError('Debes marcar la casilla obligatoria: "Acepto los Términos y Condiciones del Servicio" (Ley 1480 de 2011).');
+      setLegalError('Debes marcar la casilla: "Acepto los Términos y Condiciones del Servicio" (Ley 1480 de 2011).');
       return;
     }
 
+    // Guardar lead de manera asíncrona
     saveQuoteLead({
       client_name: name,
       client_phone: phone,
@@ -147,8 +213,21 @@ export default function InteractiveQuoter({ onOpenLegal, selectedPackageId }) {
       terms_accepted: true
     }).catch(console.warn);
 
-    const encoded = encodeURIComponent(buildWhatsAppMessage());
-    window.open(`https://wa.me/${cleanWhatsAppNumber}?text=${encoded}`, '_blank');
+    const messageText = buildWhatsAppMessage();
+    const encoded = encodeURIComponent(messageText);
+    const waUrl = `https://wa.me/${cleanWhatsAppNumber}?text=${encoded}`;
+    setLastWhatsAppUrl(waUrl);
+
+    // Intentar abrir WhatsApp en pestaña nueva o redirigir en móviles
+    try {
+      const win = window.open(waUrl, '_blank');
+      if (!win || win.closed || typeof win.closed === 'undefined') {
+        window.location.href = waUrl;
+      }
+    } catch {
+      window.location.href = waUrl;
+    }
+
     setSubmittedSuccess(true);
   };
 
@@ -157,7 +236,7 @@ export default function InteractiveQuoter({ onOpenLegal, selectedPackageId }) {
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Encabezado */}
-        <div className="text-center max-w-3xl mx-auto mb-12">
+        <div className="text-center max-w-3xl mx-auto mb-10">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-100/70 border border-purple-200 text-purple-800 text-xs font-black uppercase tracking-wider mb-3 font-sans">
             <Calculator className="w-4 h-4 text-purple-700" />
             <span>Cotizador Interactivo Paso a Paso</span>
@@ -170,12 +249,20 @@ export default function InteractiveQuoter({ onOpenLegal, selectedPackageId }) {
           <p className="mt-2 text-slate-600 text-sm sm:text-base font-sans">
             Elige el tipo de evento, número de niños y shows adicionales como la <strong className="text-purple-900">Fábrica de Burbujas</strong>. Conoce el valor estimado y envíalo directo a nuestro WhatsApp sin intermediarios.
           </p>
+
+          {/* Notificación de plan seleccionado desde la web */}
+          {selectedPlanNotification && (
+            <div className="mt-4 p-3 bg-purple-100 border border-purple-300 rounded-2xl inline-flex items-center gap-2 text-xs font-bold text-purple-900 animate-fade-in font-sans">
+              <Sparkles className="w-4 h-4 text-purple-700 flex-shrink-0" />
+              <span>Configuración preseleccionada: <strong>{selectedPlanNotification}</strong>. Puedes modificarla libremente a continuación:</span>
+            </div>
+          )}
         </div>
 
         {/* Wizard Container */}
         <div className="bg-white rounded-3xl border-2 border-purple-100 shadow-xl overflow-hidden">
           
-          {/* Stepper Tabs */}
+          {/* Stepper Tabs Interactivos */}
           <div className="grid grid-cols-4 bg-purple-50/80 border-b border-purple-100 text-center font-display">
             {[
               { num: 1, title: '1. Evento' },
@@ -187,10 +274,10 @@ export default function InteractiveQuoter({ onOpenLegal, selectedPackageId }) {
                 key={s.num}
                 type="button"
                 onClick={() => setStep(s.num)}
-                className={`py-3.5 px-2 text-xs sm:text-sm font-bold transition flex items-center justify-center gap-1.5 ${
+                className={`py-3.5 px-2 text-xs sm:text-sm font-bold transition flex items-center justify-center gap-1.5 cursor-pointer ${
                   step === s.num
                     ? 'bg-white text-purple-900 border-b-2 border-purple-700 shadow-sm'
-                    : 'text-slate-500 hover:text-purple-700'
+                    : 'text-slate-500 hover:text-purple-700 hover:bg-white/50'
                 }`}
               >
                 <span>{s.title}</span>
@@ -208,7 +295,7 @@ export default function InteractiveQuoter({ onOpenLegal, selectedPackageId }) {
                     Paso 1: ¿Qué tipo de evento estás organizando?
                   </h3>
                   <p className="text-xs text-slate-500 mt-1 font-sans">
-                    Selecciona la opción que mejor describa tu celebración:
+                    Haz clic en la opción que mejor describa tu celebración:
                   </p>
                 </div>
 
@@ -217,16 +304,17 @@ export default function InteractiveQuoter({ onOpenLegal, selectedPackageId }) {
                     const Icon = type.icon;
                     const isSelected = selectedEventType.id === type.id;
                     return (
-                      <div
+                      <button
+                        type="button"
                         key={type.id}
                         onClick={() => setSelectedEventType(type)}
-                        className={`p-5 rounded-2xl border-2 cursor-pointer transition flex items-start gap-4 ${
+                        className={`p-5 rounded-2xl border-2 text-left cursor-pointer transition flex items-start gap-4 ${
                           isSelected
                             ? 'border-purple-600 bg-purple-50/60 shadow-md ring-2 ring-purple-600/20'
                             : 'border-slate-200 hover:border-purple-300 bg-white'
                         }`}
                       >
-                        <div className={`p-3 rounded-xl ${isSelected ? 'bg-purple-700 text-white' : 'bg-slate-100 text-slate-700'}`}>
+                        <div className={`p-3 rounded-xl flex-shrink-0 ${isSelected ? 'bg-purple-700 text-white' : 'bg-slate-100 text-slate-700'}`}>
                           <Icon className="w-6 h-6" />
                         </div>
                         <div>
@@ -236,7 +324,7 @@ export default function InteractiveQuoter({ onOpenLegal, selectedPackageId }) {
                             Base: {formatCOP(type.basePrice)}
                           </span>
                         </div>
-                      </div>
+                      </button>
                     );
                   })}
                 </div>
@@ -245,7 +333,7 @@ export default function InteractiveQuoter({ onOpenLegal, selectedPackageId }) {
                   <button
                     type="button"
                     onClick={() => setStep(2)}
-                    className="px-6 py-3 bg-purple-700 hover:bg-purple-800 text-white font-bold text-xs uppercase tracking-wider rounded-xl transition flex items-center gap-2 shadow-md font-display"
+                    className="px-6 py-3.5 bg-purple-700 hover:bg-purple-800 text-white font-bold text-xs uppercase tracking-wider rounded-xl transition flex items-center gap-2 shadow-md font-display cursor-pointer"
                   >
                     <span>Siguiente: Cantidad de Niños</span>
                     <ArrowRight className="w-4 h-4" />
@@ -270,10 +358,11 @@ export default function InteractiveQuoter({ onOpenLegal, selectedPackageId }) {
                   {GUEST_OPTIONS_LIST.map((guest) => {
                     const isSelected = selectedGuest.id === guest.id;
                     return (
-                      <div
+                      <button
+                        type="button"
                         key={guest.id}
                         onClick={() => setSelectedGuest(guest)}
-                        className={`p-5 rounded-2xl border-2 cursor-pointer transition ${
+                        className={`p-5 rounded-2xl border-2 text-left cursor-pointer transition ${
                           isSelected
                             ? 'border-purple-600 bg-purple-50/60 shadow-md ring-2 ring-purple-600/20'
                             : 'border-slate-200 hover:border-purple-300 bg-white'
@@ -290,7 +379,7 @@ export default function InteractiveQuoter({ onOpenLegal, selectedPackageId }) {
                             {guest.priceAdj === 0 ? 'Sin recargo' : `+${formatCOP(guest.priceAdj)}`}
                           </span>
                         </div>
-                      </div>
+                      </button>
                     );
                   })}
                 </div>
@@ -299,7 +388,7 @@ export default function InteractiveQuoter({ onOpenLegal, selectedPackageId }) {
                   <button
                     type="button"
                     onClick={() => setStep(1)}
-                    className="px-5 py-3 border border-slate-300 hover:bg-slate-50 text-slate-700 font-bold text-xs uppercase tracking-wider rounded-xl transition flex items-center gap-2 font-display"
+                    className="px-5 py-3 border border-slate-300 hover:bg-slate-50 text-slate-700 font-bold text-xs uppercase tracking-wider rounded-xl transition flex items-center gap-2 font-display cursor-pointer"
                   >
                     <ArrowLeft className="w-4 h-4" />
                     <span>Atrás</span>
@@ -308,7 +397,7 @@ export default function InteractiveQuoter({ onOpenLegal, selectedPackageId }) {
                   <button
                     type="button"
                     onClick={() => setStep(3)}
-                    className="px-6 py-3 bg-purple-700 hover:bg-purple-800 text-white font-bold text-xs uppercase tracking-wider rounded-xl transition flex items-center gap-2 shadow-md font-display"
+                    className="px-6 py-3.5 bg-purple-700 hover:bg-purple-800 text-white font-bold text-xs uppercase tracking-wider rounded-xl transition flex items-center gap-2 shadow-md font-display cursor-pointer"
                   >
                     <span>Siguiente: Shows y Extras</span>
                     <ArrowRight className="w-4 h-4" />
@@ -325,7 +414,7 @@ export default function InteractiveQuoter({ onOpenLegal, selectedPackageId }) {
                     Paso 3: Personaliza tu fiesta con Shows y Extras
                   </h3>
                   <p className="text-xs text-slate-500 mt-1 font-sans">
-                    Agrega la Fábrica de Burbujas, circo, títeres, inflables o snacks:
+                    Haz clic para añadir o retirar la Fábrica de Burbujas, circo, títeres, inflables o snacks:
                   </p>
                 </div>
 
@@ -333,10 +422,11 @@ export default function InteractiveQuoter({ onOpenLegal, selectedPackageId }) {
                   {ADDONS.map((addon) => {
                     const isChecked = selectedExtras.includes(addon.id);
                     return (
-                      <div
+                      <button
+                        type="button"
                         key={addon.id}
                         onClick={() => toggleExtra(addon.id)}
-                        className={`p-4 rounded-2xl border-2 cursor-pointer transition flex items-start gap-3 ${
+                        className={`p-4 rounded-2xl border-2 text-left cursor-pointer transition flex items-start gap-3 ${
                           isChecked
                             ? 'border-purple-600 bg-purple-50/60 shadow-sm'
                             : 'border-slate-200 hover:border-purple-200 bg-white'
@@ -354,7 +444,7 @@ export default function InteractiveQuoter({ onOpenLegal, selectedPackageId }) {
                           </div>
                           <p className="text-[11px] text-slate-500 mt-0.5 font-sans">{addon.desc}</p>
                         </div>
-                      </div>
+                      </button>
                     );
                   })}
                 </div>
@@ -364,18 +454,18 @@ export default function InteractiveQuoter({ onOpenLegal, selectedPackageId }) {
                   <div className="flex items-center gap-2">
                     <Sparkles className="w-5 h-5 text-amber-600" />
                     <div>
-                      <span className="text-xs text-slate-600 font-sans">Total estimado hasta este paso:</span>
+                      <span className="text-xs text-slate-600 font-sans">Total estimado acumulado:</span>
                       <strong className="block text-xl font-black text-slate-900 font-display">{formatCOP(grandTotal)}</strong>
                     </div>
                   </div>
-                  <span className="text-xs text-amber-800 font-bold font-sans">50% de abono al reservar</span>
+                  <span className="text-xs text-amber-800 font-bold font-sans">50% de abono para reservar</span>
                 </div>
 
                 <div className="flex justify-between pt-4">
                   <button
                     type="button"
                     onClick={() => setStep(2)}
-                    className="px-5 py-3 border border-slate-300 hover:bg-slate-50 text-slate-700 font-bold text-xs uppercase tracking-wider rounded-xl transition flex items-center gap-2 font-display"
+                    className="px-5 py-3 border border-slate-300 hover:bg-slate-50 text-slate-700 font-bold text-xs uppercase tracking-wider rounded-xl transition flex items-center gap-2 font-display cursor-pointer"
                   >
                     <ArrowLeft className="w-4 h-4" />
                     <span>Atrás</span>
@@ -384,7 +474,7 @@ export default function InteractiveQuoter({ onOpenLegal, selectedPackageId }) {
                   <button
                     type="button"
                     onClick={() => setStep(4)}
-                    className="px-6 py-3 bg-purple-700 hover:bg-purple-800 text-white font-bold text-xs uppercase tracking-wider rounded-xl transition flex items-center gap-2 shadow-md font-display"
+                    className="px-6 py-3.5 bg-purple-700 hover:bg-purple-800 text-white font-bold text-xs uppercase tracking-wider rounded-xl transition flex items-center gap-2 shadow-md font-display cursor-pointer"
                   >
                     <span>Siguiente: Datos y WhatsApp</span>
                     <ArrowRight className="w-4 h-4" />
@@ -468,7 +558,7 @@ export default function InteractiveQuoter({ onOpenLegal, selectedPackageId }) {
                   </label>
                   <textarea
                     rows={2}
-                    placeholder="Ej. Fiesta temática de Circo para mi hijo de 5 años en salón comunal..."
+                    placeholder="Ej. Fiesta temática con Show de Burbujas en salón comunal..."
                     value={notes}
                     onChange={(e) => setNotes(e.target.value)}
                     className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-purple-600 focus:ring-2 focus:ring-purple-600/20 text-xs text-slate-900"
@@ -476,80 +566,94 @@ export default function InteractiveQuoter({ onOpenLegal, selectedPackageId }) {
                 </div>
 
                 {/* Resumen Final de Valores */}
-                <div className="p-5 rounded-2xl bg-purple-50 border-2 border-purple-200 space-y-2">
-                  <div className="flex items-center justify-between text-xs text-slate-600 font-sans">
+                <div className="p-5 rounded-2xl bg-purple-50 border-2 border-purple-200 space-y-2 font-sans">
+                  <div className="flex items-center justify-between text-xs text-slate-600">
                     <span>Evento: {selectedEventType.label} ({selectedGuest.label})</span>
                     <span>{formatCOP(selectedEventType.basePrice + selectedGuest.priceAdj)}</span>
                   </div>
                   {extrasTotal > 0 && (
-                    <div className="flex items-center justify-between text-xs text-slate-600 font-sans">
+                    <div className="flex items-center justify-between text-xs text-slate-600">
                       <span>Shows y Extras ({selectedExtras.length} seleccionados)</span>
                       <span>+{formatCOP(extrasTotal)}</span>
                     </div>
                   )}
                   <div className="pt-2 border-t border-purple-200 flex items-center justify-between">
                     <div>
-                      <span className="text-xs text-slate-500 font-bold block font-sans">TOTAL ESTIMADO:</span>
+                      <span className="text-xs text-slate-500 font-bold block">TOTAL ESTIMADO:</span>
                       <span className="text-2xl font-black text-purple-900 font-display">{formatCOP(grandTotal)}</span>
                     </div>
                     <div className="text-right">
-                      <span className="text-[11px] text-slate-500 font-sans">Abono requerido (50%):</span>
+                      <span className="text-[11px] text-slate-500">Abono de reserva (50%):</span>
                       <span className="block text-base font-bold text-emerald-700 font-display">{formatCOP(grandTotal * 0.5)}</span>
                     </div>
                   </div>
                 </div>
 
                 {/* CHECKBOXES LEGALES OBLIGATORIOS (COLOMBIA) */}
-                <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
-                  <span className="text-[11px] font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1.5 font-sans">
+                <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-3 font-sans">
+                  <span className="text-[11px] font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
                     <ShieldCheck className="w-4 h-4 text-purple-700" />
                     <span>Consentimiento Legal Obligatorio (Colombia)</span>
                   </span>
 
-                  {/* Checkbox 1: Habeas Data (Ley 1581) */}
-                  <label className="flex items-start gap-2.5 cursor-pointer text-xs text-slate-700 font-sans">
+                  {/* Checkbox 1: Habeas Data */}
+                  <div className="flex items-start gap-2.5">
                     <input
+                      id="checkbox-habeas"
                       type="checkbox"
                       checked={acceptedHabeasData}
                       onChange={(e) => setAcceptedHabeasData(e.target.checked)}
-                      className="mt-0.5 w-4 h-4 text-purple-700 border-slate-300 rounded focus:ring-purple-600"
+                      className="mt-0.5 w-4 h-4 text-purple-700 border-slate-300 rounded focus:ring-purple-600 cursor-pointer"
                     />
-                    <span>
-                      Acepto la{' '}
+                    <div className="text-xs text-slate-700">
+                      <label htmlFor="checkbox-habeas" className="cursor-pointer">
+                        Acepto la{' '}
+                      </label>
                       <button
                         type="button"
-                        onClick={() => onOpenLegal && onOpenLegal('privacy')}
-                        className="text-purple-700 font-bold underline hover:text-purple-900"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          onOpenLegal && onOpenLegal('privacy');
+                        }}
+                        className="text-purple-700 font-bold underline hover:text-purple-900 cursor-pointer"
                       >
                         Política de Tratamiento de Datos Personales
-                      </button>{' '}
-                      (Ley 1581 de 2012 / Habeas Data) para la recepción de esta cotización.
-                    </span>
-                  </label>
+                      </button>
+                      <span> (Ley 1581 de 2012 / Habeas Data) para la recepción de esta cotización.</span>
+                    </div>
+                  </div>
 
-                  {/* Checkbox 2: Términos y Condiciones (Ley 1480) */}
-                  <label className="flex items-start gap-2.5 cursor-pointer text-xs text-slate-700 font-sans">
+                  {/* Checkbox 2: Términos y Condiciones */}
+                  <div className="flex items-start gap-2.5">
                     <input
+                      id="checkbox-terms"
                       type="checkbox"
                       checked={acceptedTerms}
                       onChange={(e) => setAcceptedTerms(e.target.checked)}
-                      className="mt-0.5 w-4 h-4 text-purple-700 border-slate-300 rounded focus:ring-purple-600"
+                      className="mt-0.5 w-4 h-4 text-purple-700 border-slate-300 rounded focus:ring-purple-600 cursor-pointer"
                     />
-                    <span>
-                      Acepto los{' '}
+                    <div className="text-xs text-slate-700">
+                      <label htmlFor="checkbox-terms" className="cursor-pointer">
+                        Acepto los{' '}
+                      </label>
                       <button
                         type="button"
-                        onClick={() => onOpenLegal && onOpenLegal('terms')}
-                        className="text-purple-700 font-bold underline hover:text-purple-900"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          onOpenLegal && onOpenLegal('terms');
+                        }}
+                        className="text-purple-700 font-bold underline hover:text-purple-900 cursor-pointer"
                       >
                         Términos y Condiciones del Servicio
-                      </button>{' '}
-                      (Ley 1480 de 2011), incluyendo política de abono del 50% y Derecho de Retracto (Art. 47).
-                    </span>
-                  </label>
+                      </button>
+                      <span> (Ley 1480 de 2011), incluyendo abono del 50% y Derecho de Retracto (Art. 47).</span>
+                    </div>
+                  </div>
                 </div>
 
-                {/* Mensaje de error legal si no marca checkboxes */}
+                {/* Mensaje de error legal */}
                 {legalError && (
                   <div className="p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-xs flex items-center gap-2 font-bold font-sans">
                     <AlertCircle className="w-4 h-4 text-rose-600 flex-shrink-0" />
@@ -557,12 +661,12 @@ export default function InteractiveQuoter({ onOpenLegal, selectedPackageId }) {
                   </div>
                 )}
 
-                {/* Botón de Envío a WhatsApp */}
+                {/* Botones de Envío a WhatsApp */}
                 <div className="flex flex-col sm:flex-row gap-3 pt-2">
                   <button
                     type="button"
                     onClick={() => setStep(3)}
-                    className="sm:w-1/3 py-3.5 border border-slate-300 hover:bg-slate-50 text-slate-700 font-bold text-xs uppercase tracking-wider rounded-xl transition flex items-center justify-center gap-2 font-display"
+                    className="sm:w-1/3 py-3.5 border border-slate-300 hover:bg-slate-50 text-slate-700 font-bold text-xs uppercase tracking-wider rounded-xl transition flex items-center justify-center gap-2 font-display cursor-pointer"
                   >
                     <ArrowLeft className="w-4 h-4" />
                     <span>Atrás</span>
@@ -570,17 +674,29 @@ export default function InteractiveQuoter({ onOpenLegal, selectedPackageId }) {
 
                   <button
                     type="submit"
-                    className="sm:w-2/3 py-4 px-6 bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs uppercase tracking-wider rounded-xl shadow-xl shadow-emerald-600/30 transition flex items-center justify-center gap-2 font-display"
+                    className="sm:w-2/3 py-4 px-6 bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs uppercase tracking-wider rounded-xl shadow-xl shadow-emerald-600/30 transition flex items-center justify-center gap-2 font-display cursor-pointer"
                   >
                     <MessageCircle className="w-5 h-5 fill-current" />
                     <span>Enviar Cotización a WhatsApp (300 125 0524)</span>
                   </button>
                 </div>
 
+                {/* Respaldo si el navegador bloqueó la ventana emergente */}
                 {submittedSuccess && (
-                  <p className="text-center text-xs font-bold text-emerald-700 font-sans">
-                    ✓ ¡Cotización generada y enviada a WhatsApp! Te atenderemos en breves minutos.
-                  </p>
+                  <div className="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-center space-y-2 font-sans">
+                    <p className="text-xs font-bold text-emerald-800">
+                      ✓ ¡Cotización generada con éxito! Si WhatsApp no se abrió automáticamente, presiona este botón:
+                    </p>
+                    <a
+                      href={lastWhatsAppUrl || `https://wa.me/${cleanWhatsAppNumber}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs uppercase tracking-wider rounded-xl shadow-md font-display"
+                    >
+                      <MessageCircle className="w-4 h-4 fill-current" />
+                      <span>Abrir mi Cotización en WhatsApp</span>
+                    </a>
+                  </div>
                 )}
               </form>
             )}

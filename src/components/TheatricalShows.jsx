@@ -188,8 +188,8 @@ export default function TheatricalShows({ onSelectShow }) {
                   </ul>
                 </div>
 
-                {/* Botón de Cotización por WhatsApp */}
-                <div className="pt-2">
+                {/* Botón de Cotización por WhatsApp y Cotizador */}
+                <div className="pt-2 space-y-2">
                   <a
                     href={`https://wa.me/${cleanWhatsAppNumber}?text=${encodeURIComponent(show.whatsappMsg)}`}
                     target="_blank"
@@ -202,6 +202,14 @@ export default function TheatricalShows({ onSelectShow }) {
                   >
                     <MessageCircle className="w-4 h-4 fill-current" />
                     <span>Cotizar este Show</span>
+                  </a>
+
+                  <a
+                    href="#cotizador"
+                    onClick={() => onSelectShow && onSelectShow(show.id)}
+                    className="w-full py-1.5 text-center text-xs text-purple-700 hover:text-purple-950 font-bold block cursor-pointer font-sans"
+                  >
+                    O personalizar en cotizador ↓
                   </a>
                 </div>
 

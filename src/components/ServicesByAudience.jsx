@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Cake, Building2, Briefcase, GraduationCap, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { Cake, Building2, Briefcase, GraduationCap, ArrowRight, CheckCircle2, MessageCircle } from 'lucide-react';
 import { LEGAL_INFO } from '@/lib/legalContent';
 
 export default function ServicesByAudience({ onSelectAudience }) {
@@ -126,16 +126,26 @@ export default function ServicesByAudience({ onSelectAudience }) {
                   </ul>
                 </div>
 
-                {/* WhatsApp Action Button */}
-                <a
-                  href={`https://wa.me/${cleanWhatsAppNumber}?text=${encodeURIComponent(aud.whatsappMsg)}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full py-2.5 px-3 bg-slate-50 hover:bg-purple-700 text-slate-700 hover:text-white border border-slate-200 hover:border-purple-700 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 shadow-sm font-sans"
-                >
-                  <span>Cotizar {aud.title}</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </a>
+                {/* Botones de Acción */}
+                <div className="space-y-2">
+                  <a
+                    href={`https://wa.me/${cleanWhatsAppNumber}?text=${encodeURIComponent(aud.whatsappMsg)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full py-2.5 px-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 shadow-sm font-sans"
+                  >
+                    <MessageCircle className="w-3.5 h-3.5 fill-current" />
+                    <span>Cotizar {aud.title}</span>
+                  </a>
+
+                  <a
+                    href="#cotizador"
+                    onClick={() => onSelectAudience && onSelectAudience(aud.id)}
+                    className="w-full py-1.5 text-center text-xs text-purple-700 hover:text-purple-950 font-bold block cursor-pointer font-sans"
+                  >
+                    O calcular presupuesto en cotizador ↓
+                  </a>
+                </div>
               </div>
             );
           })}

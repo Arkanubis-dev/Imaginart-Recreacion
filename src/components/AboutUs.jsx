@@ -31,9 +31,9 @@ export default function AboutUs() {
   return (
     <section id="nosotros" className="py-20 bg-white border-t border-purple-100 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          
+
           <div className="lg:col-span-7 space-y-6">
             <span className="text-xs font-black uppercase tracking-wider text-purple-700 bg-purple-50 border border-purple-200 px-3.5 py-1.5 rounded-full font-sans">
               Nuestra Filosofía
@@ -68,7 +68,7 @@ export default function AboutUs() {
 
           <div className="lg:col-span-5">
             <div className="bg-gradient-to-b from-purple-50/70 to-white border-2 border-purple-100 rounded-3xl p-7 shadow-lg space-y-6 text-center">
-              
+
               <div className="w-20 h-20 bg-gradient-to-tr from-purple-700 via-fuchsia-600 to-amber-400 rounded-3xl mx-auto flex items-center justify-center text-white shadow-md shadow-purple-500/20">
                 <Palette className="w-10 h-10" />
               </div>
