@@ -84,7 +84,7 @@ export default function InteractiveQuoter({ onOpenLegal, selectedPackageId }) {
       setSelectedGuest(GUEST_OPTIONS_LIST[2]);
       setSelectedExtras(['fabrica-burbujas', 'luces-humo']);
       setSelectedPlanNotification('Mega Show Burbujas & Circo ($680.000 COP)');
-      setStep(3); // Llevarlo directo al paso de extras
+      setStep(3);
     } else if (selectedPackageId === 'fabrica-burbujas' || selectedPackageId === 'burbujas' || selectedPackageId === 'burbujas-show') {
       setSelectedEventType(EVENT_TYPES_LIST[1]);
       setSelectedGuest(GUEST_OPTIONS_LIST[1]);
@@ -218,7 +218,6 @@ export default function InteractiveQuoter({ onOpenLegal, selectedPackageId }) {
     const waUrl = `https://wa.me/${cleanWhatsAppNumber}?text=${encoded}`;
     setLastWhatsAppUrl(waUrl);
 
-    // Intentar abrir WhatsApp en pestaña nueva o redirigir en móviles
     try {
       const win = window.open(waUrl, '_blank');
       if (!win || win.closed || typeof win.closed === 'undefined') {
@@ -232,41 +231,41 @@ export default function InteractiveQuoter({ onOpenLegal, selectedPackageId }) {
   };
 
   return (
-    <section id="cotizador" className="py-20 bg-gradient-to-b from-purple-50/40 via-white to-amber-50/30 relative border-t border-purple-100">
+    <section id="cotizador" className="py-20 bg-[#FDFBF7] relative">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Encabezado */}
-        <div className="text-center max-w-3xl mx-auto mb-10">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-100/70 border border-purple-200 text-purple-800 text-xs font-black uppercase tracking-wider mb-3 font-sans">
-            <Calculator className="w-4 h-4 text-purple-700" />
+        <div className="text-center max-w-3xl mx-auto mb-12">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#EAE0D0] text-[#555560] text-xs font-semibold tracking-wide mb-3">
+            <Calculator className="w-3.5 h-3.5 text-[#7C5CFA]" />
             <span>Cotizador Interactivo Paso a Paso</span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight font-display">
-            Calcula Tu Evento al Instante
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#242429] tracking-tight font-display">
+            Calcula tu evento al instante
           </h2>
 
-          <p className="mt-2 text-slate-600 text-sm sm:text-base font-sans">
-            Elige el tipo de evento, número de niños y shows adicionales como la <strong className="text-purple-900">Fábrica de Burbujas</strong>. Conoce el valor estimado y envíalo directo a nuestro WhatsApp sin intermediarios.
+          <p className="mt-2 text-base text-[#555560]">
+            Elige el tipo de evento, número de niños y shows adicionales como la <strong className="text-[#242429]">Fábrica de Burbujas</strong>. Conoce el valor estimado y envíalo directo a nuestro WhatsApp sin intermediarios.
           </p>
 
           {/* Notificación de plan seleccionado desde la web */}
           {selectedPlanNotification && (
-            <div className="mt-4 p-3 bg-purple-100 border border-purple-300 rounded-2xl inline-flex items-center gap-2 text-xs font-bold text-purple-900 animate-fade-in font-sans">
-              <Sparkles className="w-4 h-4 text-purple-700 flex-shrink-0" />
-              <span>Configuración preseleccionada: <strong>{selectedPlanNotification}</strong>. Puedes modificarla libremente a continuación:</span>
+            <div className="mt-4 p-3 bg-[#E8DFF5]/60 border border-[#D5C4ED] rounded-2xl inline-flex items-center gap-2 text-xs font-semibold text-[#6442DF] animate-fade-in">
+              <Sparkles className="w-4 h-4 flex-shrink-0" />
+              <span>Configuración seleccionada: <strong>{selectedPlanNotification}</strong>. Puedes ajustarla a continuación:</span>
             </div>
           )}
         </div>
 
         {/* Wizard Container */}
-        <div className="bg-white rounded-3xl border-2 border-purple-100 shadow-xl overflow-hidden">
+        <div className="bg-white rounded-[2.5rem] border border-[#EAE0D0] shadow-soft-lg overflow-hidden">
           
-          {/* Stepper Tabs Interactivos */}
-          <div className="grid grid-cols-4 bg-purple-50/80 border-b border-purple-100 text-center font-display">
+          {/* Stepper Tabs */}
+          <div className="grid grid-cols-4 bg-[#FAF6EE] border-b border-[#EAE0D0] text-center font-display">
             {[
               { num: 1, title: '1. Evento' },
-              { num: 2, title: '2. Niños' },
+              { num: 2, title: '2. Asistentes' },
               { num: 3, title: '3. Shows / Extras' },
               { num: 4, title: '4. WhatsApp & Datos' }
             ].map((s) => (
@@ -274,10 +273,10 @@ export default function InteractiveQuoter({ onOpenLegal, selectedPackageId }) {
                 key={s.num}
                 type="button"
                 onClick={() => setStep(s.num)}
-                className={`py-3.5 px-2 text-xs sm:text-sm font-bold transition flex items-center justify-center gap-1.5 cursor-pointer ${
+                className={`py-4 px-2 text-xs sm:text-sm font-bold transition flex items-center justify-center gap-1.5 cursor-pointer ${
                   step === s.num
-                    ? 'bg-white text-purple-900 border-b-2 border-purple-700 shadow-sm'
-                    : 'text-slate-500 hover:text-purple-700 hover:bg-white/50'
+                    ? 'bg-white text-[#242429] border-b-2 border-[#7C5CFA] shadow-soft'
+                    : 'text-[#767682] hover:text-[#242429] hover:bg-white/40'
                 }`}
               >
                 <span>{s.title}</span>
@@ -291,11 +290,11 @@ export default function InteractiveQuoter({ onOpenLegal, selectedPackageId }) {
             {step === 1 && (
               <div className="space-y-6">
                 <div>
-                  <h3 className="text-xl font-black text-slate-900 font-display">
+                  <h3 className="text-xl font-bold text-[#242429] font-display">
                     Paso 1: ¿Qué tipo de evento estás organizando?
                   </h3>
-                  <p className="text-xs text-slate-500 mt-1 font-sans">
-                    Haz clic en la opción que mejor describa tu celebración:
+                  <p className="text-xs text-[#555560] mt-1">
+                    Selecciona la opción que mejor describa tu celebración:
                   </p>
                 </div>
 
@@ -308,19 +307,19 @@ export default function InteractiveQuoter({ onOpenLegal, selectedPackageId }) {
                         type="button"
                         key={type.id}
                         onClick={() => setSelectedEventType(type)}
-                        className={`p-5 rounded-2xl border-2 text-left cursor-pointer transition flex items-start gap-4 ${
+                        className={`p-5 rounded-3xl border-2 text-left cursor-pointer transition-all duration-200 flex items-start gap-4 ${
                           isSelected
-                            ? 'border-purple-600 bg-purple-50/60 shadow-md ring-2 ring-purple-600/20'
-                            : 'border-slate-200 hover:border-purple-300 bg-white'
+                            ? 'border-[#7C5CFA] bg-[#E8DFF5]/30 shadow-soft'
+                            : 'border-[#EAE0D0] hover:border-[#D5C4ED] bg-white'
                         }`}
                       >
-                        <div className={`p-3 rounded-xl flex-shrink-0 ${isSelected ? 'bg-purple-700 text-white' : 'bg-slate-100 text-slate-700'}`}>
-                          <Icon className="w-6 h-6" />
+                        <div className={`p-3 rounded-2xl flex-shrink-0 ${isSelected ? 'bg-[#7C5CFA] text-white' : 'bg-[#FAF6EE] text-[#555560]'}`}>
+                          <Icon className="w-5 h-5" />
                         </div>
                         <div>
-                          <h4 className="text-base font-black text-slate-900 font-display">{type.label}</h4>
-                          <p className="text-xs text-slate-500 mt-0.5 font-sans">{type.desc}</p>
-                          <span className="text-xs font-bold text-purple-700 mt-2 block font-display">
+                          <h4 className="text-base font-bold text-[#242429] font-display">{type.label}</h4>
+                          <p className="text-xs text-[#555560] mt-0.5">{type.desc}</p>
+                          <span className="text-xs font-bold text-[#7C5CFA] mt-2 block font-display">
                             Base: {formatCOP(type.basePrice)}
                           </span>
                         </div>
@@ -333,7 +332,7 @@ export default function InteractiveQuoter({ onOpenLegal, selectedPackageId }) {
                   <button
                     type="button"
                     onClick={() => setStep(2)}
-                    className="px-6 py-3.5 bg-purple-700 hover:bg-purple-800 text-white font-bold text-xs uppercase tracking-wider rounded-xl transition flex items-center gap-2 shadow-md font-display cursor-pointer"
+                    className="px-6 py-3.5 bg-[#7C5CFA] hover:bg-[#6442DF] text-white font-semibold text-xs uppercase tracking-wider rounded-2xl transition shadow-soft hover:shadow-soft-lg font-display cursor-pointer flex items-center gap-2"
                   >
                     <span>Siguiente: Cantidad de Niños</span>
                     <ArrowRight className="w-4 h-4" />
@@ -346,11 +345,11 @@ export default function InteractiveQuoter({ onOpenLegal, selectedPackageId }) {
             {step === 2 && (
               <div className="space-y-6">
                 <div>
-                  <h3 className="text-xl font-black text-slate-900 font-display">
+                  <h3 className="text-xl font-bold text-[#242429] font-display">
                     Paso 2: ¿Cuántos niños o asistentes participarán?
                   </h3>
-                  <p className="text-xs text-slate-500 mt-1 font-sans">
-                    Calculamos el staff de recreadores necesario para una atención segura y personalizada:
+                  <p className="text-xs text-[#555560] mt-1">
+                    Calculamos el staff necesario para una atención segura y personalizada:
                   </p>
                 </div>
 
@@ -362,20 +361,20 @@ export default function InteractiveQuoter({ onOpenLegal, selectedPackageId }) {
                         type="button"
                         key={guest.id}
                         onClick={() => setSelectedGuest(guest)}
-                        className={`p-5 rounded-2xl border-2 text-left cursor-pointer transition ${
+                        className={`p-5 rounded-3xl border-2 text-left cursor-pointer transition-all duration-200 ${
                           isSelected
-                            ? 'border-purple-600 bg-purple-50/60 shadow-md ring-2 ring-purple-600/20'
-                            : 'border-slate-200 hover:border-purple-300 bg-white'
+                            ? 'border-[#7C5CFA] bg-[#E8DFF5]/30 shadow-soft'
+                            : 'border-[#EAE0D0] hover:border-[#D5C4ED] bg-white'
                         }`}
                       >
                         <div className="flex items-center justify-between">
-                          <h4 className="text-base font-black text-slate-900 font-display">{guest.label}</h4>
-                          {isSelected && <CheckCircle className="w-5 h-5 text-purple-700" />}
+                          <h4 className="text-base font-bold text-[#242429] font-display">{guest.label}</h4>
+                          {isSelected && <CheckCircle className="w-5 h-5 text-[#7C5CFA]" />}
                         </div>
-                        <p className="text-xs text-slate-500 mt-1 font-sans">{guest.desc}</p>
-                        <div className="mt-3 flex items-center justify-between text-xs pt-2 border-t border-purple-100">
-                          <span className="font-semibold text-purple-900 font-sans">👥 {guest.staff}</span>
-                          <span className="font-bold text-slate-600 font-display">
+                        <p className="text-xs text-[#555560] mt-1">{guest.desc}</p>
+                        <div className="mt-3 flex items-center justify-between text-xs pt-2 border-t border-[#F4ECE0]">
+                          <span className="font-semibold text-[#242429]">👥 {guest.staff}</span>
+                          <span className="font-bold text-[#555560] font-display">
                             {guest.priceAdj === 0 ? 'Sin recargo' : `+${formatCOP(guest.priceAdj)}`}
                           </span>
                         </div>
@@ -388,7 +387,7 @@ export default function InteractiveQuoter({ onOpenLegal, selectedPackageId }) {
                   <button
                     type="button"
                     onClick={() => setStep(1)}
-                    className="px-5 py-3 border border-slate-300 hover:bg-slate-50 text-slate-700 font-bold text-xs uppercase tracking-wider rounded-xl transition flex items-center gap-2 font-display cursor-pointer"
+                    className="px-5 py-3 border border-[#EAE0D0] hover:bg-[#FAF6EE] text-[#555560] font-semibold text-xs uppercase tracking-wider rounded-2xl transition flex items-center gap-2 cursor-pointer font-display"
                   >
                     <ArrowLeft className="w-4 h-4" />
                     <span>Atrás</span>
@@ -397,7 +396,7 @@ export default function InteractiveQuoter({ onOpenLegal, selectedPackageId }) {
                   <button
                     type="button"
                     onClick={() => setStep(3)}
-                    className="px-6 py-3.5 bg-purple-700 hover:bg-purple-800 text-white font-bold text-xs uppercase tracking-wider rounded-xl transition flex items-center gap-2 shadow-md font-display cursor-pointer"
+                    className="px-6 py-3.5 bg-[#7C5CFA] hover:bg-[#6442DF] text-white font-semibold text-xs uppercase tracking-wider rounded-2xl transition shadow-soft font-display cursor-pointer flex items-center gap-2"
                   >
                     <span>Siguiente: Shows y Extras</span>
                     <ArrowRight className="w-4 h-4" />
@@ -410,11 +409,11 @@ export default function InteractiveQuoter({ onOpenLegal, selectedPackageId }) {
             {step === 3 && (
               <div className="space-y-6">
                 <div>
-                  <h3 className="text-xl font-black text-slate-900 font-display">
+                  <h3 className="text-xl font-bold text-[#242429] font-display">
                     Paso 3: Personaliza tu fiesta con Shows y Extras
                   </h3>
-                  <p className="text-xs text-slate-500 mt-1 font-sans">
-                    Haz clic para añadir o retirar la Fábrica de Burbujas, circo, títeres, inflables o snacks:
+                  <p className="text-xs text-[#555560] mt-1">
+                    Selecciona para añadir o retirar la Fábrica de Burbujas, circo, títeres o inflables:
                   </p>
                 </div>
 
@@ -426,23 +425,23 @@ export default function InteractiveQuoter({ onOpenLegal, selectedPackageId }) {
                         type="button"
                         key={addon.id}
                         onClick={() => toggleExtra(addon.id)}
-                        className={`p-4 rounded-2xl border-2 text-left cursor-pointer transition flex items-start gap-3 ${
+                        className={`p-4 rounded-2xl border-2 text-left cursor-pointer transition-all duration-200 flex items-start gap-3 ${
                           isChecked
-                            ? 'border-purple-600 bg-purple-50/60 shadow-sm'
-                            : 'border-slate-200 hover:border-purple-200 bg-white'
+                            ? 'border-[#7C5CFA] bg-[#E8DFF5]/30 shadow-soft'
+                            : 'border-[#EAE0D0] hover:border-[#D5C4ED] bg-white'
                         }`}
                       >
-                        <div className={`w-5 h-5 rounded-md border flex items-center justify-center flex-shrink-0 mt-0.5 ${
-                          isChecked ? 'bg-purple-700 border-purple-700 text-white' : 'border-slate-300 bg-white'
+                        <div className={`w-5 h-5 rounded-lg border flex items-center justify-center flex-shrink-0 mt-0.5 ${
+                          isChecked ? 'bg-[#7C5CFA] border-[#7C5CFA] text-white' : 'border-[#CBD5E1] bg-white'
                         }`}>
                           {isChecked && <Check className="w-3.5 h-3.5 stroke-[3]" />}
                         </div>
                         <div className="flex-grow">
                           <div className="flex items-center justify-between">
-                            <h4 className="text-xs font-black text-slate-900 font-display">{addon.name}</h4>
-                            <span className="text-xs font-black text-purple-700 font-display">{addon.priceFormatted}</span>
+                            <h4 className="text-xs font-bold text-[#242429] font-display">{addon.name}</h4>
+                            <span className="text-xs font-extrabold text-[#7C5CFA] font-display">{addon.priceFormatted}</span>
                           </div>
-                          <p className="text-[11px] text-slate-500 mt-0.5 font-sans">{addon.desc}</p>
+                          <p className="text-[11px] text-[#555560] mt-0.5">{addon.desc}</p>
                         </div>
                       </button>
                     );
@@ -450,22 +449,22 @@ export default function InteractiveQuoter({ onOpenLegal, selectedPackageId }) {
                 </div>
 
                 {/* Subtotal flotante */}
-                <div className="p-4 rounded-2xl bg-amber-50 border border-amber-200 flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <Sparkles className="w-5 h-5 text-amber-600" />
+                <div className="p-4 rounded-2xl bg-[#FFF4CC]/50 border border-[#FFE999] flex items-center justify-between">
+                  <div className="flex items-center gap-2.5">
+                    <Sparkles className="w-5 h-5 text-[#996B00]" />
                     <div>
-                      <span className="text-xs text-slate-600 font-sans">Total estimado acumulado:</span>
-                      <strong className="block text-xl font-black text-slate-900 font-display">{formatCOP(grandTotal)}</strong>
+                      <span className="text-xs text-[#555560]">Total estimado acumulado:</span>
+                      <strong className="block text-xl font-bold text-[#242429] font-display">{formatCOP(grandTotal)}</strong>
                     </div>
                   </div>
-                  <span className="text-xs text-amber-800 font-bold font-sans">50% de abono para reservar</span>
+                  <span className="text-xs text-[#996B00] font-semibold">50% de abono para reservar</span>
                 </div>
 
                 <div className="flex justify-between pt-4">
                   <button
                     type="button"
                     onClick={() => setStep(2)}
-                    className="px-5 py-3 border border-slate-300 hover:bg-slate-50 text-slate-700 font-bold text-xs uppercase tracking-wider rounded-xl transition flex items-center gap-2 font-display cursor-pointer"
+                    className="px-5 py-3 border border-[#EAE0D0] hover:bg-[#FAF6EE] text-[#555560] font-semibold text-xs uppercase tracking-wider rounded-2xl transition flex items-center gap-2 cursor-pointer font-display"
                   >
                     <ArrowLeft className="w-4 h-4" />
                     <span>Atrás</span>
@@ -474,7 +473,7 @@ export default function InteractiveQuoter({ onOpenLegal, selectedPackageId }) {
                   <button
                     type="button"
                     onClick={() => setStep(4)}
-                    className="px-6 py-3.5 bg-purple-700 hover:bg-purple-800 text-white font-bold text-xs uppercase tracking-wider rounded-xl transition flex items-center gap-2 shadow-md font-display cursor-pointer"
+                    className="px-6 py-3.5 bg-[#7C5CFA] hover:bg-[#6442DF] text-white font-semibold text-xs uppercase tracking-wider rounded-2xl transition shadow-soft font-display cursor-pointer flex items-center gap-2"
                   >
                     <span>Siguiente: Datos y WhatsApp</span>
                     <ArrowRight className="w-4 h-4" />
@@ -487,17 +486,17 @@ export default function InteractiveQuoter({ onOpenLegal, selectedPackageId }) {
             {step === 4 && (
               <form onSubmit={handleSendToWhatsApp} className="space-y-6">
                 <div>
-                  <h3 className="text-xl font-black text-slate-900 font-display">
+                  <h3 className="text-xl font-bold text-[#242429] font-display">
                     Paso 4: Envía tu Cotización a WhatsApp
                   </h3>
-                  <p className="text-xs text-slate-500 mt-1 font-sans">
-                    Ingresa tus datos para generar el presupuesto y recibir atención inmediata en el <strong className="text-slate-900">300 125 0524</strong>:
+                  <p className="text-xs text-[#555560] mt-1">
+                    Ingresa tus datos para generar el presupuesto y recibir atención inmediata en el <strong className="text-[#242429]">300 125 0524</strong>:
                   </p>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1 font-sans">
+                    <label className="block text-xs font-semibold text-[#242429] mb-1">
                       Nombre Completo *
                     </label>
                     <input
@@ -506,12 +505,12 @@ export default function InteractiveQuoter({ onOpenLegal, selectedPackageId }) {
                       placeholder="Ej. Carolina Mendoza"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-purple-600 focus:ring-2 focus:ring-purple-600/20 text-xs text-slate-900"
+                      className="w-full px-4 py-3 rounded-2xl border border-[#EAE0D0] focus:border-[#7C5CFA] focus:ring-2 focus:ring-[#7C5CFA]/20 text-xs text-[#242429] bg-[#FAF6EE]/50"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1 font-sans">
+                    <label className="block text-xs font-semibold text-[#242429] mb-1">
                       WhatsApp o Celular de Contacto *
                     </label>
                     <input
@@ -520,18 +519,18 @@ export default function InteractiveQuoter({ onOpenLegal, selectedPackageId }) {
                       placeholder="Ej. 300 123 4567"
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-purple-600 focus:ring-2 focus:ring-purple-600/20 text-xs text-slate-900"
+                      className="w-full px-4 py-3 rounded-2xl border border-[#EAE0D0] focus:border-[#7C5CFA] focus:ring-2 focus:ring-[#7C5CFA]/20 text-xs text-[#242429] bg-[#FAF6EE]/50"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1 font-sans">
+                    <label className="block text-xs font-semibold text-[#242429] mb-1">
                       Zona o Barrio en Bogotá / Sabana *
                     </label>
                     <select
                       value={zone}
                       onChange={(e) => setZone(e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-purple-600 focus:ring-2 focus:ring-purple-600/20 text-xs text-slate-900 bg-white"
+                      className="w-full px-4 py-3 rounded-2xl border border-[#EAE0D0] focus:border-[#7C5CFA] focus:ring-2 focus:ring-[#7C5CFA]/20 text-xs text-[#242429] bg-white"
                     >
                       {BOGOTA_ZONES.map((z, idx) => (
                         <option key={idx} value={z}>{z}</option>
@@ -540,20 +539,20 @@ export default function InteractiveQuoter({ onOpenLegal, selectedPackageId }) {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1 font-sans">
+                    <label className="block text-xs font-semibold text-[#242429] mb-1">
                       Fecha Estimada del Evento
                     </label>
                     <input
                       type="date"
                       value={eventDate}
                       onChange={(e) => setEventDate(e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-purple-600 focus:ring-2 focus:ring-purple-600/20 text-xs text-slate-900"
+                      className="w-full px-4 py-3 rounded-2xl border border-[#EAE0D0] focus:border-[#7C5CFA] focus:ring-2 focus:ring-[#7C5CFA]/20 text-xs text-[#242429] bg-[#FAF6EE]/50"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1 font-sans">
+                  <label className="block text-xs font-semibold text-[#242429] mb-1">
                     Comentarios o Temática Especial (Opcional)
                   </label>
                   <textarea
@@ -561,38 +560,38 @@ export default function InteractiveQuoter({ onOpenLegal, selectedPackageId }) {
                     placeholder="Ej. Fiesta temática con Show de Burbujas en salón comunal..."
                     value={notes}
                     onChange={(e) => setNotes(e.target.value)}
-                    className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-purple-600 focus:ring-2 focus:ring-purple-600/20 text-xs text-slate-900"
+                    className="w-full px-4 py-3 rounded-2xl border border-[#EAE0D0] focus:border-[#7C5CFA] focus:ring-2 focus:ring-[#7C5CFA]/20 text-xs text-[#242429] bg-[#FAF6EE]/50"
                   />
                 </div>
 
                 {/* Resumen Final de Valores */}
-                <div className="p-5 rounded-2xl bg-purple-50 border-2 border-purple-200 space-y-2 font-sans">
-                  <div className="flex items-center justify-between text-xs text-slate-600">
+                <div className="p-5 rounded-2xl bg-[#FAF6EE] border border-[#EAE0D0] space-y-2">
+                  <div className="flex items-center justify-between text-xs text-[#555560]">
                     <span>Evento: {selectedEventType.label} ({selectedGuest.label})</span>
                     <span>{formatCOP(selectedEventType.basePrice + selectedGuest.priceAdj)}</span>
                   </div>
                   {extrasTotal > 0 && (
-                    <div className="flex items-center justify-between text-xs text-slate-600">
+                    <div className="flex items-center justify-between text-xs text-[#555560]">
                       <span>Shows y Extras ({selectedExtras.length} seleccionados)</span>
                       <span>+{formatCOP(extrasTotal)}</span>
                     </div>
                   )}
-                  <div className="pt-2 border-t border-purple-200 flex items-center justify-between">
+                  <div className="pt-2 border-t border-[#EAE0D0] flex items-center justify-between">
                     <div>
-                      <span className="text-xs text-slate-500 font-bold block">TOTAL ESTIMADO:</span>
-                      <span className="text-2xl font-black text-purple-900 font-display">{formatCOP(grandTotal)}</span>
+                      <span className="text-xs text-[#555560] font-bold block">TOTAL ESTIMADO:</span>
+                      <span className="text-2xl font-extrabold text-[#242429] font-display">{formatCOP(grandTotal)}</span>
                     </div>
                     <div className="text-right">
-                      <span className="text-[11px] text-slate-500">Abono de reserva (50%):</span>
-                      <span className="block text-base font-bold text-emerald-700 font-display">{formatCOP(grandTotal * 0.5)}</span>
+                      <span className="text-[11px] text-[#555560]">Abono de reserva (50%):</span>
+                      <span className="block text-base font-bold text-[#2A9D8F] font-display">{formatCOP(grandTotal * 0.5)}</span>
                     </div>
                   </div>
                 </div>
 
                 {/* CHECKBOXES LEGALES OBLIGATORIOS (COLOMBIA) */}
-                <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-3 font-sans">
-                  <span className="text-[11px] font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
-                    <ShieldCheck className="w-4 h-4 text-purple-700" />
+                <div className="p-4 rounded-2xl bg-white border border-[#EAE0D0] space-y-3">
+                  <span className="text-[11px] font-bold text-[#242429] uppercase tracking-wider flex items-center gap-1.5 font-display">
+                    <ShieldCheck className="w-4 h-4 text-[#7C5CFA]" />
                     <span>Consentimiento Legal Obligatorio (Colombia)</span>
                   </span>
 
@@ -603,9 +602,9 @@ export default function InteractiveQuoter({ onOpenLegal, selectedPackageId }) {
                       type="checkbox"
                       checked={acceptedHabeasData}
                       onChange={(e) => setAcceptedHabeasData(e.target.checked)}
-                      className="mt-0.5 w-4 h-4 text-purple-700 border-slate-300 rounded focus:ring-purple-600 cursor-pointer"
+                      className="mt-0.5 w-4 h-4 text-[#7C5CFA] border-[#CBD5E1] rounded-md focus:ring-[#7C5CFA] cursor-pointer"
                     />
-                    <div className="text-xs text-slate-700">
+                    <div className="text-xs text-[#555560]">
                       <label htmlFor="checkbox-habeas" className="cursor-pointer">
                         Acepto la{' '}
                       </label>
@@ -616,7 +615,7 @@ export default function InteractiveQuoter({ onOpenLegal, selectedPackageId }) {
                           e.stopPropagation();
                           onOpenLegal && onOpenLegal('privacy');
                         }}
-                        className="text-purple-700 font-bold underline hover:text-purple-900 cursor-pointer"
+                        className="text-[#7C5CFA] font-bold underline hover:text-[#6442DF] cursor-pointer"
                       >
                         Política de Tratamiento de Datos Personales
                       </button>
@@ -631,9 +630,9 @@ export default function InteractiveQuoter({ onOpenLegal, selectedPackageId }) {
                       type="checkbox"
                       checked={acceptedTerms}
                       onChange={(e) => setAcceptedTerms(e.target.checked)}
-                      className="mt-0.5 w-4 h-4 text-purple-700 border-slate-300 rounded focus:ring-purple-600 cursor-pointer"
+                      className="mt-0.5 w-4 h-4 text-[#7C5CFA] border-[#CBD5E1] rounded-md focus:ring-[#7C5CFA] cursor-pointer"
                     />
-                    <div className="text-xs text-slate-700">
+                    <div className="text-xs text-[#555560]">
                       <label htmlFor="checkbox-terms" className="cursor-pointer">
                         Acepto los{' '}
                       </label>
@@ -644,7 +643,7 @@ export default function InteractiveQuoter({ onOpenLegal, selectedPackageId }) {
                           e.stopPropagation();
                           onOpenLegal && onOpenLegal('terms');
                         }}
-                        className="text-purple-700 font-bold underline hover:text-purple-900 cursor-pointer"
+                        className="text-[#7C5CFA] font-bold underline hover:text-[#6442DF] cursor-pointer"
                       >
                         Términos y Condiciones del Servicio
                       </button>
@@ -655,8 +654,8 @@ export default function InteractiveQuoter({ onOpenLegal, selectedPackageId }) {
 
                 {/* Mensaje de error legal */}
                 {legalError && (
-                  <div className="p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-xs flex items-center gap-2 font-bold font-sans">
-                    <AlertCircle className="w-4 h-4 text-rose-600 flex-shrink-0" />
+                  <div className="p-3.5 rounded-2xl bg-[#FCE1D6]/60 border border-[#FAC8B5] text-[#E26248] text-xs flex items-center gap-2 font-semibold">
+                    <AlertCircle className="w-4 h-4 text-[#E26248] flex-shrink-0" />
                     <span>{legalError}</span>
                   </div>
                 )}
@@ -666,7 +665,7 @@ export default function InteractiveQuoter({ onOpenLegal, selectedPackageId }) {
                   <button
                     type="button"
                     onClick={() => setStep(3)}
-                    className="sm:w-1/3 py-3.5 border border-slate-300 hover:bg-slate-50 text-slate-700 font-bold text-xs uppercase tracking-wider rounded-xl transition flex items-center justify-center gap-2 font-display cursor-pointer"
+                    className="sm:w-1/3 py-3.5 border border-[#EAE0D0] hover:bg-[#FAF6EE] text-[#555560] font-semibold text-xs uppercase tracking-wider rounded-2xl transition flex items-center justify-center gap-2 font-display cursor-pointer"
                   >
                     <ArrowLeft className="w-4 h-4" />
                     <span>Atrás</span>
@@ -674,24 +673,24 @@ export default function InteractiveQuoter({ onOpenLegal, selectedPackageId }) {
 
                   <button
                     type="submit"
-                    className="sm:w-2/3 py-4 px-6 bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs uppercase tracking-wider rounded-xl shadow-xl shadow-emerald-600/30 transition flex items-center justify-center gap-2 font-display cursor-pointer"
+                    className="sm:w-2/3 py-4 px-6 bg-[#7C5CFA] hover:bg-[#6442DF] text-white font-semibold text-xs uppercase tracking-wider rounded-2xl shadow-soft hover:shadow-soft-lg transition flex items-center justify-center gap-2 font-display cursor-pointer"
                   >
                     <MessageCircle className="w-5 h-5 fill-current" />
                     <span>Enviar Cotización a WhatsApp (300 125 0524)</span>
                   </button>
                 </div>
 
-                {/* Respaldo si el navegador bloqueó la ventana emergente */}
+                {/* Respaldo si el navegador bloqueó popup */}
                 {submittedSuccess && (
-                  <div className="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-center space-y-2 font-sans">
-                    <p className="text-xs font-bold text-emerald-800">
+                  <div className="p-4 rounded-2xl bg-[#D9F2EC]/40 border border-[#BFE7DE] text-center space-y-2">
+                    <p className="text-xs font-semibold text-[#1F7E73]">
                       ✓ ¡Cotización generada con éxito! Si WhatsApp no se abrió automáticamente, presiona este botón:
                     </p>
                     <a
                       href={lastWhatsAppUrl || `https://wa.me/${cleanWhatsAppNumber}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs uppercase tracking-wider rounded-xl shadow-md font-display"
+                      className="inline-flex items-center gap-2 px-6 py-3 bg-[#2A9D8F] hover:bg-[#1F7E73] text-white font-semibold text-xs uppercase tracking-wider rounded-2xl shadow-soft font-display"
                     >
                       <MessageCircle className="w-4 h-4 fill-current" />
                       <span>Abrir mi Cotización en WhatsApp</span>

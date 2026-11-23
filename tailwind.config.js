@@ -8,32 +8,70 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        theater: {
-          50: '#fdf4ff',
-          100: '#fae8ff',
-          200: '#f5d0fe',
-          300: '#f0abfc',
-          400: '#e879f9',
-          500: '#d946ef',
-          600: '#c026d3',
-          700: '#9c12d1', // La Teatrina Signature Magenta / Purple
-          800: '#86198f',
-          900: '#701a75',
+        cream: {
+          50: '#FDFBF7',   // Main background
+          100: '#FAF6EE',
+          200: '#F4ECE0',
+          300: '#EAE0D0',
         },
-        sunny: {
-          400: '#fbbf24',
-          500: '#f59e0b',
-          600: '#d97706',
+        lavender: {
+          50: '#FAF8FD',
+          100: '#F3EEFA',
+          200: '#E8DFF5',  // Pastel lavender accent
+          300: '#D5C4ED',
+          400: '#B69CE2',
+          500: '#9571D8',
+          600: '#7C5CFA',  // Deep warm lavender CTA
+          700: '#6442DF',
         },
-        bubble: {
-          400: '#38bdf8',
-          500: '#0ea5e9',
-          600: '#0284c7',
+        mint: {
+          50: '#F4FAF8',
+          100: '#E7F7F3',
+          200: '#D9F2EC',  // Pastel mint accent
+          300: '#BFE7DE',
+          600: '#2A9D8F',
+          700: '#1F7E73',
+        },
+        peach: {
+          50: '#FEF8F5',
+          100: '#FDF0E9',
+          200: '#FCE1D6',  // Soft peach/melon accent
+          300: '#F8C8B5',
+          400: '#F59E87',
+          500: '#F27D65',  // Soft coral CTA
+          600: '#E26248',
+        },
+        butter: {
+          50: '#FFFDF5',
+          100: '#FFFBE6',
+          200: '#FFF4CC',  // Butter yellow accent
+          300: '#FFE999',
+          500: '#E5B82A',
+        },
+        charcoal: {
+          700: '#464652',
+          800: '#34343D',
+          900: '#242429',  // Dark charcoal for titles
+          950: '#17171B',
+        },
+        slateText: {
+          500: '#767682',
+          600: '#555560',  // Medium gray for body paragraphs
+          700: '#3E3E47',
         }
       },
       fontFamily: {
-        display: ['Fredoka', 'sans-serif'],
-        sans: ['Nunito', 'system-ui', 'sans-serif'],
+        display: ['var(--font-jakarta)', 'Plus Jakarta Sans', 'Fredoka', 'sans-serif'],
+        sans: ['var(--font-dmsans)', 'DM Sans', 'Nunito', 'system-ui', 'sans-serif'],
+      },
+      borderRadius: {
+        '4xl': '2rem',
+        '5xl': '2.5rem',
+      },
+      boxShadow: {
+        'soft': '0 4px 20px -2px rgba(36, 36, 41, 0.05)',
+        'soft-lg': '0 12px 32px -4px rgba(36, 36, 41, 0.08)',
+        'soft-xl': '0 20px 40px -6px rgba(36, 36, 41, 0.1)',
       }
     },
   },

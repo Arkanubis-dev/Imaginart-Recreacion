@@ -1,13 +1,13 @@
 import './globals.css';
 
 export const metadata = {
-  title: 'Imagin-ART-recreación | Recreación Infantil y Eventos en Bogotá y Sabana',
-  description: 'Imagin-ART-recreación: Recreación infantil creativa, eventos para conjuntos residenciales y empresas en Bogotá, Chía, Cota y alrededores. Recreadores uniformados con ARL, inflables certificados, minitecas neón y pintucaritas artístico. WhatsApp: 300 125 0524.',
-  keywords: 'Imagin-ART recreacion, recreacion infantil bogota, recreacionistas para fiestas bogota, eventos para conjuntos residenciales bogota, minitecas bogota, inflables bogota',
+  title: 'Imagin-ART | Recreación Creativa y Shows Infantiles en Bogotá',
+  description: 'Agencia de eventos infantiles, shows teatrales, fábrica de burbujas gigantes y recreación para fiestas, conjuntos residenciales y empresas en Bogotá y la Sabana. Personal con ARL y factura electrónica. WhatsApp: 300 125 0524.',
+  keywords: 'Imagin-ART recreacion, recreacion infantil bogota, shows infantiles bogota, fabrica de burbujas bogota, eventos para conjuntos residenciales bogota, fiestas infantiles picardias estilo',
   authors: [{ name: 'Imagin-ART-recreación S.A.S.' }],
   openGraph: {
-    title: 'Imagin-ART-recreación | Eventos y Diversión en Bogotá',
-    description: '+7 años de experiencia, recreadores con ARL, puntualidad y diversión garantizada. WhatsApp: 300 125 0524.',
+    title: 'Imagin-ART | Experiencias Mágicas para Fiestas Infantiles en Bogotá',
+    description: '+7 años creando magia y recuerdos inolvidables con obras teatrales, burbujas y dinamismo profesional.',
     locale: 'es_CO',
     type: 'website',
   }
@@ -23,7 +23,7 @@ const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'EntertainmentBusiness',
   'name': 'Imagin-ART-recreación S.A.S.',
-  'alternateName': 'Imagin-ART-recreación',
+  'alternateName': 'Imagin-ART Eventos Infantiles',
   'telephone': '+573001250524',
   'email': 'contacto@imaginartrecreacion.com',
   'address': {
@@ -59,7 +59,7 @@ export default function RootLayout({ children }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="antialiased bg-[#FAFBFD] text-slate-800 min-h-screen selection:bg-indigo-500 selection:text-white font-sans">
+      <body className="antialiased bg-[#FDFBF7] text-[#555560] min-h-screen selection:bg-[#E8DFF5] selection:text-[#242429]">
         {children}
       </body>
     </html>

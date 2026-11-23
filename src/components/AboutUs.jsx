@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Heart, ShieldCheck, Clock, Users, Palette, CheckCircle2 } from 'lucide-react';
+import { Heart, ShieldCheck, Clock, Users, CheckCircle2, Sparkles } from 'lucide-react';
 import { LEGAL_INFO } from '@/lib/legalContent';
 
 export default function AboutUs() {
@@ -9,56 +9,73 @@ export default function AboutUs() {
     {
       icon: Clock,
       title: 'Puntualidad Absoluta',
-      desc: 'Llegamos 30 minutos antes para montaje y preparación. Tu tiempo y tu programación son sagrados.'
+      desc: 'Llegamos 30 a 45 minutos antes para montaje y ambientación. Tu cronograma y tu tiempo son sagrados.',
+      bg: 'bg-[#FFF4CC]',
+      color: 'text-[#996B00]'
     },
     {
       icon: Heart,
-      title: 'Recreación & Arte Sin Violencia',
-      desc: 'Dinámicas basadas en valores, inclusión, trabajo en equipo y respeto. Cero burlas ni humillaciones.'
+      title: 'Recreación Sin Violencia',
+      desc: 'Dinámicas basadas en empatía, arte y valores. Cero burlas, apodos ni humillaciones en público.',
+      bg: 'bg-[#FCE1D6]',
+      color: 'text-[#E26248]'
     },
     {
       icon: ShieldCheck,
-      title: 'Seguridad Integral',
-      desc: 'Capacitación en primeros auxilios, pólizas de cumplimiento y maquillaje hipoalergénico certificado.'
+      title: 'Seguridad & Protocolos',
+      desc: 'Personal capacitado en primeros auxilios básicos, pólizas vigentes y maquillaje al agua hipoalergénico.',
+      bg: 'bg-[#D9F2EC]',
+      color: 'text-[#1F7E73]'
     },
     {
       icon: Users,
-      title: 'Personal Apasionado',
-      desc: 'Recreadores uniformados, estudiantes de artes escénicas, pedagogía o educación física con vocación.'
+      title: 'Vocación Pedagógica',
+      desc: 'Recreadores y actores estudiantes de artes escénicas, pedagogía o educación física uniformados con ARL.',
+      bg: 'bg-[#E8DFF5]',
+      color: 'text-[#6442DF]'
     }
   ];
 
   return (
-    <section id="nosotros" className="py-20 bg-white border-t border-purple-100 relative">
+    <section id="nosotros" className="py-20 bg-[#FDFBF7] relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-
+        
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center">
+          
+          {/* Columna Izquierda: Filosofía */}
           <div className="lg:col-span-7 space-y-6">
-            <span className="text-xs font-black uppercase tracking-wider text-purple-700 bg-purple-50 border border-purple-200 px-3.5 py-1.5 rounded-full font-sans">
-              Nuestra Filosofía
-            </span>
-            <h2 className="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight font-display">
-              Más de 7 Años Llenando de Arte, Magia y Sonrisas las Fiestas en Bogotá
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#EAE0D0] text-[#555560] text-xs font-semibold tracking-wide">
+              <Sparkles className="w-3.5 h-3.5 text-[#7C5CFA]" />
+              <span>Nuestra Filosofía</span>
+            </div>
+
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#242429] tracking-tight font-display">
+              Devolviéndole la magia y el arte a las celebraciones infantiles
             </h2>
-            <p className="text-slate-600 text-sm sm:text-base leading-relaxed font-sans">
-              En <strong className="text-purple-900 font-extrabold">Imagin-ART-recreación</strong> nacimos con una misión clara: devolverle la magia y el valor pedagógico a la recreación infantil y familiar, alejándonos de la improvisación.
-            </p>
-            <p className="text-slate-500 text-sm leading-relaxed font-sans">
-              Somos aliados estratégicos de familias, conjuntos residenciales de todas las localidades y empresas de la sabana. Nuestro personal se capacita permanentemente en artes escénicas, manejo de grupos infantiles, primeros auxilios básicos y protocolos de seguridad.
+
+            <p className="text-base sm:text-lg text-[#555560] leading-relaxed">
+              En <strong className="text-[#242429]">Imagin-ART</strong> nacimos para transformar la recreación tradicional en una experiencia artística auténtica. Creemos firmemente que una fiesta infantil debe ser un espacio de asombro, respeto mutuo y alegría compartida entre niños y adultos.
             </p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 font-sans">
+            <p className="text-sm text-[#555560] leading-relaxed">
+              Trabajamos con familias en todas las localidades de Bogotá (Usaquén, Suba, Colina, Cedritos, Salitre, Chapinero) y municipios de la Sabana (Chía, Cajicá, Cota, Soacha). Cada integrante de nuestro equipo cuenta con seguridad social verificable y vocación pedagógica comprobada.
+            </p>
+
+            {/* 4 Pilares */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
               {pillars.map((pil, idx) => {
                 const Icon = pil.icon;
                 return (
-                  <div key={idx} className="bg-purple-50/50 p-4 rounded-2xl border border-purple-100 flex items-start gap-3">
-                    <div className="p-2.5 bg-purple-100 text-purple-700 rounded-xl flex-shrink-0 mt-0.5 border border-purple-200">
-                      <Icon className="w-4 h-4" />
+                  <div 
+                    key={idx} 
+                    className="bg-white p-4.5 rounded-3xl border border-[#EAE0D0] shadow-soft flex items-start gap-3.5"
+                  >
+                    <div className={`p-2.5 ${pil.bg} ${pil.color} rounded-2xl flex-shrink-0 mt-0.5`}>
+                      <Icon className="w-4 h-4 stroke-[2.2]" />
                     </div>
                     <div>
-                      <h4 className="text-xs font-black text-slate-900">{pil.title}</h4>
-                      <p className="text-[11px] text-slate-500 mt-0.5 leading-snug">{pil.desc}</p>
+                      <h4 className="text-xs font-bold text-[#242429] font-display">{pil.title}</h4>
+                      <p className="text-[11px] text-[#555560] mt-0.5 leading-snug">{pil.desc}</p>
                     </div>
                   </div>
                 );
@@ -66,37 +83,48 @@ export default function AboutUs() {
             </div>
           </div>
 
+          {/* Columna Derecha: Tarjeta Fotográfica de Compromiso */}
           <div className="lg:col-span-5">
-            <div className="bg-gradient-to-b from-purple-50/70 to-white border-2 border-purple-100 rounded-3xl p-7 shadow-lg space-y-6 text-center">
-
-              <div className="w-20 h-20 bg-gradient-to-tr from-purple-700 via-fuchsia-600 to-amber-400 rounded-3xl mx-auto flex items-center justify-center text-white shadow-md shadow-purple-500/20">
-                <Palette className="w-10 h-10" />
+            <div className="bg-[#FAF6EE] border border-[#EAE0D0] rounded-[2.5rem] p-7 sm:p-8 shadow-soft-lg space-y-6">
+              
+              <div className="rounded-3xl overflow-hidden shadow-soft h-52 bg-[#E8DFF5] relative">
+                <img
+                  src="https://images.unsplash.com/photo-1545558014-8692077e9b5c?auto=format&fit=crop&w=700&q=80"
+                  alt="Equipo de recreadores y actores de Imagin-ART"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#242429]/50 via-transparent to-transparent" />
+                <span className="absolute bottom-3 left-4 text-xs font-bold text-white drop-shadow font-display">
+                  Staff Uniformado & Certificado
+                </span>
               </div>
 
               <div>
-                <h3 className="text-xl font-black text-slate-900 font-display">Staff Certificado & Uniformado</h3>
-                <p className="text-xs text-slate-500 mt-1 font-sans">
-                  Presentación impecable con camisetas institucionales, escarapela y calzado adecuado.
+                <h3 className="text-xl font-bold text-[#242429] font-display">
+                  Garantía de Calidad Imagin-ART
+                </h3>
+                <p className="text-xs text-[#555560] mt-1 leading-relaxed">
+                  Presentación impecable con camisetas institucionales, escarapela y verificación de antecedentes al 100%.
                 </p>
               </div>
 
-              <div className="bg-white p-4 rounded-2xl border border-purple-100 text-left space-y-2 text-xs text-slate-700 shadow-sm font-sans">
+              <div className="space-y-2 text-xs text-[#555560] bg-white p-4 rounded-2xl border border-[#EAE0D0]">
                 <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+                  <CheckCircle2 className="w-4 h-4 text-[#2A9D8F] flex-shrink-0" />
                   <span>Seguridad social y ARL al día (Planilla PILA previa).</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0" />
-                  <span>Antecedentes judiciales verificados al 100%.</span>
+                  <CheckCircle2 className="w-4 h-4 text-[#2A9D8F] flex-shrink-0" />
+                  <span>Fórmulas de burbujas biodegradables no tóxicas.</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0" />
-                  <span>Formación en manejo de emociones y aforos infantiles.</span>
+                  <CheckCircle2 className="w-4 h-4 text-[#2A9D8F] flex-shrink-0" />
+                  <span>Protocolos de seguridad y cuidado infantil en eventos.</span>
                 </div>
               </div>
 
-              <div className="text-[11px] text-slate-500 font-semibold font-sans">
-                {LEGAL_INFO.companyName} • NIT {LEGAL_INFO.nit} • WhatsApp: {LEGAL_INFO.whatsapp}
+              <div className="text-[11px] text-[#767682] pt-2 border-t border-[#EAE0D0] text-center">
+                {LEGAL_INFO.companyName} • NIT {LEGAL_INFO.nit} • Bogotá D.C.
               </div>
 
             </div>

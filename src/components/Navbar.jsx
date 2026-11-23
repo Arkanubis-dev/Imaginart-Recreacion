@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { Sparkles, MessageCircle, Menu, X, Shield, CalendarCheck, Theater, Palette } from 'lucide-react';
+import { Menu, X, ArrowUpRight, Sparkles } from 'lucide-react';
 import { LEGAL_INFO } from '@/lib/legalContent';
 
 export default function Navbar({ onOpenLegal }) {
@@ -10,153 +10,136 @@ export default function Navbar({ onOpenLegal }) {
   const cleanWhatsAppNumber = LEGAL_INFO.whatsapp.replace(/\D/g, '');
 
   return (
-    <header className="sticky top-0 z-40 w-full bg-white/95 backdrop-blur-md border-b border-purple-100 shadow-sm">
+    <header className="sticky top-0 z-40 w-full bg-[#FDFBF7]/90 backdrop-blur-md border-b border-[#F4ECE0] transition-colors duration-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           
-          {/* Logo Imagin-ART-recreación con estilo Teatral & Artístico */}
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-purple-700 via-fuchsia-600 to-amber-400 flex items-center justify-center shadow-md shadow-purple-500/20 group-hover:scale-105 transition transform">
-              <Theater className="w-6 h-6 text-white" />
+          {/* Logo Imagin-ART: Tipografía limpia y artística, sin recarga */}
+          <Link href="/" className="flex items-center gap-2.5 group">
+            <div className="w-10 h-10 rounded-2xl bg-[#E8DFF5] border border-[#D5C4ED] flex items-center justify-center text-[#7C5CFA] shadow-sm transition-transform duration-300 group-hover:scale-105">
+              <Sparkles className="w-5 h-5 fill-current" />
             </div>
-            <div>
-              <span className="text-2xl font-black tracking-tight text-slate-900 flex items-center gap-1 font-display">
-                Imagin<span className="text-purple-700 font-black">-ART</span>
+            <div className="flex flex-col">
+              <span className="text-xl sm:text-2xl font-bold tracking-tight text-[#242429] font-display">
+                Imagin<span className="text-[#7C5CFA] font-extrabold">-ART</span>
               </span>
-              <p className="text-[10px] uppercase font-bold tracking-widest text-purple-700 font-sans">
-                Shows Teatrales & Recreación
-              </p>
+              <span className="text-[10px] tracking-widest uppercase font-semibold text-[#555560]">
+                Eventos & Shows Infantiles
+              </span>
             </div>
           </Link>
 
-          {/* Menú simple desktop */}
-          <nav className="hidden xl:flex items-center gap-6 text-sm font-bold text-slate-700 font-sans">
-            <a href="#inicio" className="hover:text-purple-700 transition">
+          {/* 5 enlaces limpios sin emojis (Desktop) */}
+          <nav className="hidden lg:flex items-center gap-8 text-sm font-medium text-[#555560]">
+            <a 
+              href="#inicio" 
+              className="hover:text-[#242429] transition-colors duration-150 py-1"
+            >
               Inicio
             </a>
-            <a href="#burbujas" className="hover:text-purple-700 transition flex items-center gap-1 text-sky-600">
-              <span>🫧 Fábrica de Burbujas</span>
+            <a 
+              href="#shows" 
+              className="hover:text-[#242429] transition-colors duration-150 py-1"
+            >
+              Shows
             </a>
-            <a href="#shows" className="hover:text-purple-700 transition">
-              Shows & Teatro
+            <a 
+              href="#paquetes" 
+              className="hover:text-[#242429] transition-colors duration-150 py-1"
+            >
+              Planes
             </a>
-            <a href="#paquetes" className="hover:text-purple-700 transition">
-              Planes & Tarifas
+            <a 
+              href="#empresas-conjuntos" 
+              className="hover:text-[#242429] transition-colors duration-150 py-1"
+            >
+              Empresas y Conjuntos
             </a>
-            <a href="#empresas-conjuntos" className="hover:text-purple-700 transition flex items-center gap-1 text-purple-800 bg-purple-50 px-3 py-1.5 rounded-full border border-purple-200">
-              <span className="w-2 h-2 rounded-full bg-purple-600 animate-pulse"></span>
-              Conjuntos & Empresas
-            </a>
-            <a href="#galeria" className="hover:text-purple-700 transition">
+            <a 
+              href="#galeria" 
+              className="hover:text-[#242429] transition-colors duration-150 py-1"
+            >
               Galería
-            </a>
-            <a href="#cotizador" className="hover:text-purple-700 transition">
-              Cotizador
             </a>
           </nav>
 
-          {/* Botones de acción */}
-          <div className="hidden md:flex items-center gap-3">
-            <button
-              onClick={() => onOpenLegal('privacy')}
-              className="flex items-center gap-1 text-xs text-slate-500 hover:text-purple-700 bg-purple-50/50 border border-purple-100 px-3 py-1.5 rounded-full transition font-semibold"
-              title="Habeas Data Ley 1581"
-            >
-              <Shield className="w-3.5 h-3.5 text-purple-600" />
-              <span>Habeas Data</span>
-            </button>
-
+          {/* Botón único destacado de acción (Desktop) */}
+          <div className="hidden lg:flex items-center gap-4">
             <a
               href="#cotizador"
-              className="px-5 py-2.5 text-sm font-black text-white bg-gradient-to-r from-purple-700 via-fuchsia-600 to-purple-800 hover:from-purple-800 hover:to-fuchsia-700 rounded-2xl shadow-md shadow-purple-600/25 transition transform hover:-translate-y-0.5 flex items-center gap-2 font-display"
+              className="px-5 py-2.5 bg-[#7C5CFA] hover:bg-[#6442DF] text-white text-sm font-semibold rounded-2xl shadow-soft hover:shadow-soft-lg transition-all duration-200 transform hover:-translate-y-0.5"
             >
-              <CalendarCheck className="w-4 h-4" />
-              <span>Cotizar mi fiesta</span>
+              Cotizar Evento
             </a>
           </div>
 
-          {/* Menú Móvil */}
-          <div className="flex xl:hidden">
+          {/* Botón Hamburguesa Móvil */}
+          <div className="flex lg:hidden">
             <button
+              type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 text-slate-700 hover:text-purple-700 rounded-xl focus:outline-none"
-              aria-label="Abrir menú"
+              className="p-2.5 text-[#242429] hover:bg-[#FAF6EE] rounded-xl transition"
+              aria-label="Abrir menú de navegación"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
           </div>
         </div>
 
-        {/* Desplegable móvil */}
+        {/* Desplegable móvil limpio */}
         {mobileMenuOpen && (
-          <div className="xl:hidden py-4 border-t border-purple-100 space-y-2 bg-white">
+          <div className="lg:hidden py-4 border-t border-[#F4ECE0] space-y-2 bg-[#FDFBF7]">
             <a
               href="#inicio"
               onClick={() => setMobileMenuOpen(false)}
-              className="block px-3 py-2 text-sm font-bold text-slate-700 hover:bg-purple-50 rounded-lg"
+              className="block px-4 py-2.5 text-base font-medium text-[#242429] hover:bg-[#FAF6EE] rounded-xl transition"
             >
               Inicio
             </a>
             <a
-              href="#burbujas"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block px-3 py-2 text-sm font-bold text-sky-600 bg-sky-50 rounded-lg"
-            >
-              🫧 Fábrica de Burbujas Gigantes
-            </a>
-            <a
               href="#shows"
               onClick={() => setMobileMenuOpen(false)}
-              className="block px-3 py-2 text-sm font-bold text-slate-700 hover:bg-purple-50 rounded-lg"
+              className="block px-4 py-2.5 text-base font-medium text-[#242429] hover:bg-[#FAF6EE] rounded-xl transition"
             >
-              Shows Teatrales & Circo
+              Shows
             </a>
             <a
               href="#paquetes"
               onClick={() => setMobileMenuOpen(false)}
-              className="block px-3 py-2 text-sm font-bold text-slate-700 hover:bg-purple-50 rounded-lg"
+              className="block px-4 py-2.5 text-base font-medium text-[#242429] hover:bg-[#FAF6EE] rounded-xl transition"
             >
-              Planes & Tarifas
+              Planes
             </a>
             <a
               href="#empresas-conjuntos"
               onClick={() => setMobileMenuOpen(false)}
-              className="block px-3 py-2 text-sm font-bold text-purple-800 bg-purple-50 rounded-lg"
+              className="block px-4 py-2.5 text-base font-medium text-[#242429] hover:bg-[#FAF6EE] rounded-xl transition"
             >
-              Conjuntos & Empresas (B2B)
+              Empresas y Conjuntos
             </a>
             <a
               href="#galeria"
               onClick={() => setMobileMenuOpen(false)}
-              className="block px-3 py-2 text-sm font-bold text-slate-700 hover:bg-purple-50 rounded-lg"
+              className="block px-4 py-2.5 text-base font-medium text-[#242429] hover:bg-[#FAF6EE] rounded-xl transition"
             >
-              Galería de Fotos & Videos
-            </a>
-            <a
-              href="#cotizador"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block px-3 py-2 text-sm font-black text-purple-700 hover:bg-purple-50 rounded-lg"
-            >
-              Cotizador en Línea
+              Galería
             </a>
 
-            <div className="pt-2 border-t border-purple-100 flex flex-col gap-2">
+            <div className="pt-3 border-t border-[#F4ECE0] px-2 flex flex-col gap-2.5">
               <a
                 href="#cotizador"
                 onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-purple-700 to-fuchsia-600 text-white font-black rounded-xl text-center text-sm shadow-md"
+                className="w-full py-3 bg-[#7C5CFA] text-white text-center text-sm font-semibold rounded-2xl shadow-soft"
               >
-                <CalendarCheck className="w-4 h-4" />
-                Cotizar mi evento
+                Cotizar Evento
               </a>
               <a
-                href={`https://wa.me/${cleanWhatsAppNumber}?text=Hola%20Imagin-ART-recreación,%20quiero%20cotizar%20un%20show%20para%20una%20fiesta%20en%20Bogotá`}
+                href={`https://wa.me/${cleanWhatsAppNumber}?text=${encodeURIComponent('Hola Imagin-ART, deseo cotizar un evento recreativo en Bogotá.')}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 px-4 py-2.5 bg-emerald-600 text-white font-bold rounded-xl text-xs"
+                className="w-full py-2.5 bg-white border border-[#EAE0D0] text-[#242429] text-center text-xs font-semibold rounded-2xl hover:bg-[#FAF6EE]"
               >
-                <MessageCircle className="w-4 h-4 fill-current" />
-                WhatsApp (300 125 0524)
+                WhatsApp Directo (300 125 0524)
               </a>
             </div>
           </div>

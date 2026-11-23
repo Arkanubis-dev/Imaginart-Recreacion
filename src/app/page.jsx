@@ -3,14 +3,12 @@
 import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
-import TheatricalRibbon from '@/components/TheatricalRibbon';
-import BubbleFactoryFeature from '@/components/BubbleFactoryFeature';
-import TheatricalShows from '@/components/TheatricalShows';
 import TrustBar from '@/components/TrustBar';
-import ServicesByAudience from '@/components/ServicesByAudience';
+import OrganicWave from '@/components/OrganicWave';
+import ServicesBento from '@/components/ServicesBento';
 import Packages from '@/components/Packages';
 import B2BSection from '@/components/B2BSection';
-import GalleryReels from '@/components/GalleryReels';
+import GalleryMasonry from '@/components/GalleryMasonry';
 import Testimonials from '@/components/Testimonials';
 import InteractiveQuoter from '@/components/InteractiveQuoter';
 import AboutUs from '@/components/AboutUs';
@@ -38,56 +36,65 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FCFBFE] text-slate-900 flex flex-col justify-between selection:bg-purple-600 selection:text-white font-sans">
+    <div className="min-h-screen bg-[#FDFBF7] text-[#242429] flex flex-col justify-between selection:bg-[#E8DFF5] selection:text-[#242429] font-sans">
       
-      {/* 1. Header Limpio y Fijo con Logo y WhatsApp */}
+      {/* 1. Header Limpio y Profesional */}
       <Navbar onOpenLegal={openLegal} />
 
       <main className="flex-grow">
-        {/* 2. Hero Section Teatral estilo La Teatrina */}
+        {/* 2. Hero Inmersivo con Collage Fotográfico Dinámico */}
         <Hero />
 
-        {/* 3. Cinta Teatral Colorida (Shows, Burbujas, Circo, Títeres, etc.) */}
-        <TheatricalRibbon />
-
-        {/* 4. Show Estrella: La Fábrica de las Burbujas Gigantes */}
-        <BubbleFactoryFeature onSelectShow={handleSelectPackage} />
-
-        {/* 5. Shows Teatrales y Circo (Obras de Teatro Infantil) */}
-        <TheatricalShows onSelectShow={handleSelectPackage} />
-
-        {/* 6. Barra de Confianza (Diferenciadores Rápidos: ARL, RUT, etc.) */}
+        {/* 3. Barra de Confianza (Diferenciadores Rápidos en Tonos Pastel) */}
         <TrustBar />
 
-        {/* 7. Servicios Divididos por Tipo de Cliente (Infantiles, Conjuntos, Empresas, Colegios) */}
-        <ServicesByAudience onSelectAudience={handleSelectPackage} />
+        {/* Separador Orgánico Suave */}
+        <OrganicWave fill="#FAF6EE" />
 
-        {/* 8. Paquetes o Planes Claros (Lúdico, Mágico Teatral, Mega Burbujas) */}
+        {/* 4. Sección de Servicios Interactiva: Bento Grid Editorial con Fotografía Protagonista */}
+        <ServicesBento onSelectShow={handleSelectPackage} />
+
+        {/* Separador Orgánico */}
+        <OrganicWave fill="#FDFBF7" />
+
+        {/* 5. Planes y Paquetes Recreativos con Estilo Editorial */}
         <Packages onSelectPackage={handleSelectPackage} />
 
-        {/* 9. Sección Exclusiva para Conjuntos y Empresas (B2B + Descarga de Portafolio) */}
+        {/* Separador Orgánico */}
+        <OrganicWave fill="#FAF6EE" />
+
+        {/* 6. Sección para Conjuntos y Empresas (B2B + Ficha Técnica Imprimible) */}
         <B2BSection />
 
-        {/* 10. Galería de Fotos y Videos / Reels de Energía Real */}
-        <GalleryReels />
+        {/* Separador Orgánico */}
+        <OrganicWave fill="#FDFBF7" />
 
-        {/* 11. Prueba Social (Testimonios Reales de Bogotá) */}
+        {/* 7. Galería Tipo Mosaico (Masonry Dinámico con Fotos y Reels) */}
+        <GalleryMasonry />
+
+        {/* Separador Orgánico */}
+        <OrganicWave fill="#FAF6EE" />
+
+        {/* 8. Testimonios Reales de Familias y Administradores en Bogotá */}
         <Testimonials />
 
-        {/* 12. Formulario de Cotización Inteligente con Checkboxes Legales Obligatorios */}
+        {/* Separador Orgánico */}
+        <OrganicWave fill="#FDFBF7" />
+
+        {/* 9. Cotizador Interactivo Limpio con Checkboxes Legales Obligatorios */}
         <InteractiveQuoter 
           selectedPackageId={selectedPackageId} 
           onOpenLegal={openLegal} 
         />
 
-        {/* 13. Sección Nosotros (Historia, Valores y Seguridad) */}
+        {/* 10. Sección Nosotros (Historia, Valores Pedagógicos y Seguridad) */}
         <AboutUs />
 
-        {/* 14. Preguntas Frecuentes (Acordeón de Objeciones) */}
+        {/* 11. Preguntas Frecuentes (Acordeón de Objeciones) */}
         <FAQ onOpenLegal={openLegal} />
       </main>
 
-      {/* 15. Pie de Página con Políticas Obligatorias (Habeas Data, Términos y SIC) */}
+      {/* 12. Pie de Página con Políticas Obligatorias (Habeas Data, Términos y SIC) */}
       <LegalFooter onOpenLegal={openLegal} />
 
       {/* Modal Interactivo de Leyes */}
@@ -97,7 +104,7 @@ export default function Home() {
         initialTab={legalTab}
       />
 
-      {/* Botón Flotante de WhatsApp Business: 3001250524 */}
+      {/* Botón Flotante Discreto de WhatsApp */}
       <WhatsAppFloat />
 
     </div>
