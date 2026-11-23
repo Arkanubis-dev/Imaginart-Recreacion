@@ -20,7 +20,9 @@ import WhatsAppFloat from '@/components/WhatsAppFloat';
 export default function Home() {
   const [legalModalOpen, setLegalModalOpen] = useState(false);
   const [legalTab, setLegalTab] = useState('privacy');
-  const [selectedPackageId, setSelectedPackageId] = useState('plan-intermedio');
+  
+  // Usar objeto con timestamp para que cada clic en cualquier botón de la web siempre reactive el cotizador
+  const [selectedPackageAction, setSelectedPackageAction] = useState({ id: 'plan-intermedio', timestamp: 0 });
 
   const openLegal = (tab = 'privacy') => {
     setLegalTab(tab);
@@ -28,7 +30,7 @@ export default function Home() {
   };
 
   const handleSelectPackage = (pkgId) => {
-    setSelectedPackageId(pkgId);
+    setSelectedPackageAction({ id: pkgId, timestamp: Date.now() });
     const quoter = document.getElementById('cotizador');
     if (quoter) {
       quoter.scrollIntoView({ behavior: 'smooth' });
@@ -83,7 +85,7 @@ export default function Home() {
 
         {/* 9. Cotizador Interactivo Limpio con Checkboxes Legales Obligatorios */}
         <InteractiveQuoter 
-          selectedPackageId={selectedPackageId} 
+          selectedPackage={selectedPackageAction} 
           onOpenLegal={openLegal} 
         />
 

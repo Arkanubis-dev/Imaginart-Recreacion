@@ -9,6 +9,17 @@ export default function Navbar({ onOpenLegal }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const cleanWhatsAppNumber = LEGAL_INFO.whatsapp.replace(/\D/g, '');
 
+  const scrollToCotizador = (e) => {
+    e.preventDefault();
+    setMobileMenuOpen(false);
+    const quoter = document.getElementById('cotizador');
+    if (quoter) {
+      quoter.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      window.location.hash = '#cotizador';
+    }
+  };
+
   return (
     <header className="sticky top-0 z-40 w-full bg-[#FDFBF7]/90 backdrop-blur-md border-b border-[#F4ECE0] transition-colors duration-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -67,7 +78,8 @@ export default function Navbar({ onOpenLegal }) {
           <div className="hidden lg:flex items-center gap-4">
             <a
               href="#cotizador"
-              className="px-5 py-2.5 bg-[#7C5CFA] hover:bg-[#6442DF] text-white text-sm font-semibold rounded-2xl shadow-soft hover:shadow-soft-lg transition-all duration-200 transform hover:-translate-y-0.5"
+              onClick={scrollToCotizador}
+              className="px-5 py-2.5 bg-[#7C5CFA] hover:bg-[#6442DF] text-white text-sm font-semibold rounded-2xl shadow-soft hover:shadow-soft-lg transition-all duration-200 transform hover:-translate-y-0.5 cursor-pointer"
             >
               Cotizar Evento
             </a>
@@ -128,8 +140,8 @@ export default function Navbar({ onOpenLegal }) {
             <div className="pt-3 border-t border-[#F4ECE0] px-2 flex flex-col gap-2.5">
               <a
                 href="#cotizador"
-                onClick={() => setMobileMenuOpen(false)}
-                className="w-full py-3 bg-[#7C5CFA] text-white text-center text-sm font-semibold rounded-2xl shadow-soft"
+                onClick={scrollToCotizador}
+                className="w-full py-3 bg-[#7C5CFA] text-white text-center text-sm font-semibold rounded-2xl shadow-soft cursor-pointer block"
               >
                 Cotizar Evento
               </a>
