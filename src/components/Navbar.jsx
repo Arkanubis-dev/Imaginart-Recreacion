@@ -9,14 +9,14 @@ export default function Navbar({ onOpenLegal }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const cleanWhatsAppNumber = LEGAL_INFO.whatsapp.replace(/\D/g, '');
 
-  const scrollToCotizador = (e) => {
-    e.preventDefault();
+  const scrollToSection = (e, targetId) => {
+    if (e) e.preventDefault();
     setMobileMenuOpen(false);
-    const quoter = document.getElementById('cotizador');
-    if (quoter) {
-      quoter.scrollIntoView({ behavior: 'smooth' });
+    const element = document.getElementById(targetId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
     } else {
-      window.location.hash = '#cotizador';
+      window.location.hash = '#' + targetId;
     }
   };
 
@@ -40,35 +40,40 @@ export default function Navbar({ onOpenLegal }) {
             </div>
           </Link>
 
-          {/* 5 enlaces limpios sin emojis (Desktop) */}
+          {/* 5 enlaces limpios con scroll suave garantizado (Desktop) */}
           <nav className="hidden lg:flex items-center gap-8 text-sm font-medium text-[#555560]">
             <a 
               href="#inicio" 
-              className="hover:text-[#242429] transition-colors duration-150 py-1"
+              onClick={(e) => scrollToSection(e, 'inicio')}
+              className="hover:text-[#242429] transition-colors duration-150 py-1 cursor-pointer"
             >
               Inicio
             </a>
             <a 
               href="#shows" 
-              className="hover:text-[#242429] transition-colors duration-150 py-1"
+              onClick={(e) => scrollToSection(e, 'shows')}
+              className="hover:text-[#242429] transition-colors duration-150 py-1 cursor-pointer"
             >
               Shows
             </a>
             <a 
               href="#paquetes" 
-              className="hover:text-[#242429] transition-colors duration-150 py-1"
+              onClick={(e) => scrollToSection(e, 'paquetes')}
+              className="hover:text-[#242429] transition-colors duration-150 py-1 cursor-pointer"
             >
               Planes
             </a>
             <a 
               href="#empresas-conjuntos" 
-              className="hover:text-[#242429] transition-colors duration-150 py-1"
+              onClick={(e) => scrollToSection(e, 'empresas-conjuntos')}
+              className="hover:text-[#242429] transition-colors duration-150 py-1 cursor-pointer"
             >
               Empresas y Conjuntos
             </a>
             <a 
               href="#galeria" 
-              className="hover:text-[#242429] transition-colors duration-150 py-1"
+              onClick={(e) => scrollToSection(e, 'galeria')}
+              className="hover:text-[#242429] transition-colors duration-150 py-1 cursor-pointer"
             >
               Galería
             </a>
@@ -78,7 +83,7 @@ export default function Navbar({ onOpenLegal }) {
           <div className="hidden lg:flex items-center gap-4">
             <a
               href="#cotizador"
-              onClick={scrollToCotizador}
+              onClick={(e) => scrollToSection(e, 'cotizador')}
               className="px-5 py-2.5 bg-[#7C5CFA] hover:bg-[#6442DF] text-white text-sm font-semibold rounded-2xl shadow-soft hover:shadow-soft-lg transition-all duration-200 transform hover:-translate-y-0.5 cursor-pointer"
             >
               Cotizar Evento
@@ -103,36 +108,36 @@ export default function Navbar({ onOpenLegal }) {
           <div className="lg:hidden py-4 border-t border-[#F4ECE0] space-y-2 bg-[#FDFBF7]">
             <a
               href="#inicio"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block px-4 py-2.5 text-base font-medium text-[#242429] hover:bg-[#FAF6EE] rounded-xl transition"
+              onClick={(e) => scrollToSection(e, 'inicio')}
+              className="block px-4 py-2.5 text-base font-medium text-[#242429] hover:bg-[#FAF6EE] rounded-xl transition cursor-pointer"
             >
               Inicio
             </a>
             <a
               href="#shows"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block px-4 py-2.5 text-base font-medium text-[#242429] hover:bg-[#FAF6EE] rounded-xl transition"
+              onClick={(e) => scrollToSection(e, 'shows')}
+              className="block px-4 py-2.5 text-base font-medium text-[#242429] hover:bg-[#FAF6EE] rounded-xl transition cursor-pointer"
             >
               Shows
             </a>
             <a
               href="#paquetes"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block px-4 py-2.5 text-base font-medium text-[#242429] hover:bg-[#FAF6EE] rounded-xl transition"
+              onClick={(e) => scrollToSection(e, 'paquetes')}
+              className="block px-4 py-2.5 text-base font-medium text-[#242429] hover:bg-[#FAF6EE] rounded-xl transition cursor-pointer"
             >
               Planes
             </a>
             <a
               href="#empresas-conjuntos"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block px-4 py-2.5 text-base font-medium text-[#242429] hover:bg-[#FAF6EE] rounded-xl transition"
+              onClick={(e) => scrollToSection(e, 'empresas-conjuntos')}
+              className="block px-4 py-2.5 text-base font-medium text-[#242429] hover:bg-[#FAF6EE] rounded-xl transition cursor-pointer"
             >
               Empresas y Conjuntos
             </a>
             <a
               href="#galeria"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block px-4 py-2.5 text-base font-medium text-[#242429] hover:bg-[#FAF6EE] rounded-xl transition"
+              onClick={(e) => scrollToSection(e, 'galeria')}
+              className="block px-4 py-2.5 text-base font-medium text-[#242429] hover:bg-[#FAF6EE] rounded-xl transition cursor-pointer"
             >
               Galería
             </a>
@@ -140,7 +145,7 @@ export default function Navbar({ onOpenLegal }) {
             <div className="pt-3 border-t border-[#F4ECE0] px-2 flex flex-col gap-2.5">
               <a
                 href="#cotizador"
-                onClick={scrollToCotizador}
+                onClick={(e) => scrollToSection(e, 'cotizador')}
                 className="w-full py-3 bg-[#7C5CFA] text-white text-center text-sm font-semibold rounded-2xl shadow-soft cursor-pointer block"
               >
                 Cotizar Evento

@@ -141,7 +141,7 @@ export default function GalleryMasonry() {
             return (
               <div
                 key={item.id}
-                onClick={() => isReel && setSelectedReelModal(item)}
+                onClick={() => setSelectedReelModal(item)}
                 className={`${item.span} relative rounded-[2rem] overflow-hidden border border-[#EAE0D0] shadow-soft hover:shadow-soft-xl transition-all duration-300 group cursor-pointer bg-[#FAF6EE]`}
               >
                 <div className={`relative w-full ${item.height} overflow-hidden`}>
@@ -179,8 +179,9 @@ export default function GalleryMasonry() {
                     <span className="text-[11px] text-[#D9F2EC] font-medium block">
                       📍 {item.location}
                     </span>
-                    <h4 className="text-base sm:text-lg font-bold font-display mt-0.5 leading-tight">
-                      {item.title}
+                    <h4 className="text-base sm:text-lg font-bold font-display mt-0.5 leading-tight flex items-center justify-between">
+                      <span>{item.title}</span>
+                      <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
                     </h4>
                   </div>
                 </div>

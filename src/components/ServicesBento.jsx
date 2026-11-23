@@ -73,18 +73,18 @@ export default function ServicesBento({ onSelectShow }) {
                     href={`https://wa.me/${cleanWhatsAppNumber}?text=${encodeURIComponent('Hola Imagin-ART, deseo cotizar el show estrella "La Fábrica de las Burbujas".')}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex-1 sm:flex-none px-5 py-2.5 bg-[#7C5CFA] hover:bg-[#6442DF] text-white text-xs font-semibold rounded-xl shadow-soft transition flex items-center justify-center gap-1.5"
+                    className="flex-1 sm:flex-none px-5 py-2.5 bg-[#7C5CFA] hover:bg-[#6442DF] text-white text-xs font-semibold rounded-xl shadow-soft transition flex items-center justify-center gap-1.5 cursor-pointer"
                   >
                     <MessageCircle className="w-3.5 h-3.5 fill-current" />
-                    <span>Cotizar Show</span>
+                    <span>Cotizar por WhatsApp</span>
                   </a>
 
                   <button
                     type="button"
                     onClick={() => onSelectShow && onSelectShow('fabrica-burbujas')}
-                    className="px-4 py-2.5 bg-[#FDFBF7] hover:bg-[#FAF6EE] text-[#242429] border border-[#EAE0D0] text-xs font-semibold rounded-xl transition flex items-center gap-1 cursor-pointer"
+                    className="px-4 py-2.5 bg-[#FAF6EE] hover:bg-[#E8DFF5] text-[#6442DF] border border-[#D5C4ED] text-xs font-bold rounded-xl transition flex items-center gap-1.5 cursor-pointer shadow-sm"
                   >
-                    <span>Calcular</span>
+                    <span>Calcular en Cotizador</span>
                     <ArrowUpRight className="w-3.5 h-3.5" />
                   </button>
                 </div>
@@ -128,7 +128,7 @@ export default function ServicesBento({ onSelectShow }) {
                   href={`https://wa.me/${cleanWhatsAppNumber}?text=${encodeURIComponent('Hola Imagin-ART, deseo cotizar el Show de Teatro y Títeres en Bogotá.')}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-4 py-2 bg-[#FAF6EE] hover:bg-[#E8DFF5] text-[#242429] text-xs font-semibold rounded-xl transition flex items-center gap-1.5"
+                  className="px-4 py-2 bg-[#FAF6EE] hover:bg-[#E8DFF5] text-[#242429] text-xs font-semibold rounded-xl transition flex items-center gap-1.5 cursor-pointer"
                 >
                   <MessageCircle className="w-3.5 h-3.5 text-[#7C5CFA]" />
                   <span>WhatsApp</span>
@@ -137,9 +137,9 @@ export default function ServicesBento({ onSelectShow }) {
                 <button
                   type="button"
                   onClick={() => onSelectShow && onSelectShow('titeres')}
-                  className="text-xs font-semibold text-[#7C5CFA] hover:underline flex items-center gap-1 cursor-pointer"
+                  className="px-3.5 py-2 bg-[#E8DFF5]/60 hover:bg-[#E8DFF5] text-[#6442DF] text-xs font-bold rounded-xl transition flex items-center gap-1 cursor-pointer"
                 >
-                  <span>Ver en cotizador</span>
+                  <span>Calcular en Cotizador</span>
                   <ArrowUpRight className="w-3.5 h-3.5" />
                 </button>
               </div>
@@ -182,7 +182,7 @@ export default function ServicesBento({ onSelectShow }) {
                   href={`https://wa.me/${cleanWhatsAppNumber}?text=${encodeURIComponent('Hola Imagin-ART, deseo cotizar la Fiesta de Circo y Magia en Bogotá.')}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-4 py-2 bg-[#FAF6EE] hover:bg-[#FFF4CC] text-[#242429] text-xs font-semibold rounded-xl transition flex items-center gap-1.5"
+                  className="px-4 py-2 bg-[#FAF6EE] hover:bg-[#FFF4CC] text-[#242429] text-xs font-semibold rounded-xl transition flex items-center gap-1.5 cursor-pointer"
                 >
                   <MessageCircle className="w-3.5 h-3.5 text-[#E5B82A]" />
                   <span>WhatsApp</span>
@@ -191,9 +191,9 @@ export default function ServicesBento({ onSelectShow }) {
                 <button
                   type="button"
                   onClick={() => onSelectShow && onSelectShow('circo')}
-                  className="text-xs font-semibold text-[#7C5CFA] hover:underline flex items-center gap-1 cursor-pointer"
+                  className="px-3.5 py-2 bg-[#FFF4CC]/60 hover:bg-[#FFF4CC] text-[#996B00] text-xs font-bold rounded-xl transition flex items-center gap-1 cursor-pointer"
                 >
-                  <span>Ver en cotizador</span>
+                  <span>Calcular en Cotizador</span>
                   <ArrowUpRight className="w-3.5 h-3.5" />
                 </button>
               </div>

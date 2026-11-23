@@ -167,9 +167,10 @@ export default function Packages({ onSelectPackage }) {
                   <button
                     type="button"
                     onClick={() => onSelectPackage && onSelectPackage(plan.id)}
-                    className="w-full py-2 text-center text-xs text-[#555560] hover:text-[#7C5CFA] font-semibold block transition cursor-pointer"
+                    className="w-full py-3 px-4 rounded-2xl font-bold text-xs bg-[#FAF6EE] hover:bg-[#E8DFF5] text-[#242429] hover:text-[#6442DF] border border-[#EAE0D0] hover:border-[#D5C4ED] transition flex items-center justify-center gap-1.5 cursor-pointer font-display"
                   >
-                    O personalizar en el cotizador paso a paso ↓
+                    <span>Personalizar en el Cotizador</span>
+                    <ArrowRight className="w-3.5 h-3.5 text-[#7C5CFA]" />
                   </button>
                 </div>
 

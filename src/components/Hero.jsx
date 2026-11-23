@@ -51,7 +51,7 @@ export default function Hero() {
                 href={`https://wa.me/${cleanWhatsAppNumber}?text=${whatsAppMsg}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full sm:w-auto px-7 py-4 bg-[#7C5CFA] hover:bg-[#6442DF] text-white font-semibold text-sm rounded-2xl shadow-soft hover:shadow-soft-lg transition-all duration-200 transform hover:-translate-y-0.5 flex items-center justify-center gap-2.5 font-display"
+                className="w-full sm:w-auto px-7 py-4 bg-[#7C5CFA] hover:bg-[#6442DF] text-white font-semibold text-sm rounded-2xl shadow-soft hover:shadow-soft-lg transition-all duration-200 transform hover:-translate-y-0.5 flex items-center justify-center gap-2.5 font-display cursor-pointer"
               >
                 <MessageCircle className="w-4 h-4 fill-current" />
                 <span>Cotizar por WhatsApp (300 125 0524)</span>
@@ -59,11 +59,27 @@ export default function Hero() {
 
               <a
                 href="#shows"
-                className="w-full sm:w-auto px-6 py-4 bg-white hover:bg-[#FAF6EE] text-[#242429] border border-[#EAE0D0] font-semibold text-sm rounded-2xl shadow-sm transition-all duration-200 flex items-center justify-center gap-2"
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById('shows')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="w-full sm:w-auto px-6 py-4 bg-white hover:bg-[#FAF6EE] text-[#242429] border border-[#EAE0D0] font-semibold text-sm rounded-2xl shadow-sm transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer"
               >
                 <span>Conoce Nuestros Shows</span>
                 <ArrowRight className="w-4 h-4 text-[#7C5CFA]" />
               </a>
+            </div>
+
+            <div className="text-center lg:text-left">
+              <button
+                type="button"
+                onClick={() => {
+                  document.getElementById('cotizador')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="text-xs font-semibold text-[#7C5CFA] hover:text-[#6442DF] underline transition cursor-pointer"
+              >
+                O calcular presupuesto con el cotizador paso a paso ↓
+              </button>
             </div>
 
             {/* Diferenciadores rápidos de confianza en texto elegante */}
