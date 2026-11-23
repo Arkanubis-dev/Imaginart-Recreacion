@@ -3,6 +3,9 @@
 import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
+import TheatricalRibbon from '@/components/TheatricalRibbon';
+import BubbleFactoryFeature from '@/components/BubbleFactoryFeature';
+import TheatricalShows from '@/components/TheatricalShows';
 import TrustBar from '@/components/TrustBar';
 import ServicesByAudience from '@/components/ServicesByAudience';
 import Packages from '@/components/Packages';
@@ -35,47 +38,56 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col justify-between selection:bg-orange-500 selection:text-white">
+    <div className="min-h-screen bg-[#FCFBFE] text-slate-900 flex flex-col justify-between selection:bg-purple-600 selection:text-white font-sans">
       
-      {/* 1. Header Limpio y Fijo */}
+      {/* 1. Header Limpio y Fijo con Logo y WhatsApp */}
       <Navbar onOpenLegal={openLegal} />
 
       <main className="flex-grow">
-        {/* 2. Hero Section con H1 y visual interactivo */}
+        {/* 2. Hero Section Teatral estilo La Teatrina */}
         <Hero />
 
-        {/* 3. Barra de Confianza (Diferenciadores Rápidos) */}
+        {/* 3. Cinta Teatral Colorida (Shows, Burbujas, Circo, Títeres, etc.) */}
+        <TheatricalRibbon />
+
+        {/* 4. Show Estrella: La Fábrica de las Burbujas Gigantes */}
+        <BubbleFactoryFeature onSelectShow={handleSelectPackage} />
+
+        {/* 5. Shows Teatrales y Circo (Obras de Teatro Infantil) */}
+        <TheatricalShows onSelectShow={handleSelectPackage} />
+
+        {/* 6. Barra de Confianza (Diferenciadores Rápidos: ARL, RUT, etc.) */}
         <TrustBar />
 
-        {/* 4. Servicios Divididos por Tipo de Cliente (Infantiles, Conjuntos, Empresas, Colegios) */}
+        {/* 7. Servicios Divididos por Tipo de Cliente (Infantiles, Conjuntos, Empresas, Colegios) */}
         <ServicesByAudience onSelectAudience={handleSelectPackage} />
 
-        {/* 5. Paquetes o Planes Claros (Básico, Intermedio, Premium) */}
+        {/* 8. Paquetes o Planes Claros (Lúdico, Mágico Teatral, Mega Burbujas) */}
         <Packages onSelectPackage={handleSelectPackage} />
 
-        {/* 6. Sección Exclusiva para Conjuntos y Empresas (B2B + Descarga de Portafolio) */}
+        {/* 9. Sección Exclusiva para Conjuntos y Empresas (B2B + Descarga de Portafolio) */}
         <B2BSection />
 
-        {/* 7. Galería de Fotos y Videos / Reels de Energía Real */}
+        {/* 10. Galería de Fotos y Videos / Reels de Energía Real */}
         <GalleryReels />
 
-        {/* 8. Prueba Social (Testimonios de Bogotá) */}
+        {/* 11. Prueba Social (Testimonios Reales de Bogotá) */}
         <Testimonials />
 
-        {/* 9. Formulario de Cotización Inteligente con Checkboxes Legales */}
+        {/* 12. Formulario de Cotización Inteligente con Checkboxes Legales Obligatorios */}
         <InteractiveQuoter 
           selectedPackageId={selectedPackageId} 
           onOpenLegal={openLegal} 
         />
 
-        {/* 10. Sección Nosotros (Historia, Valores y Seguridad) */}
+        {/* 13. Sección Nosotros (Historia, Valores y Seguridad) */}
         <AboutUs />
 
-        {/* 11. Preguntas Frecuentes (Acordeón de Objeciones) */}
+        {/* 14. Preguntas Frecuentes (Acordeón de Objeciones) */}
         <FAQ onOpenLegal={openLegal} />
       </main>
 
-      {/* 12. Pie de Página con Políticas Obligatorias (Habeas Data, Términos y SIC) */}
+      {/* 15. Pie de Página con Políticas Obligatorias (Habeas Data, Términos y SIC) */}
       <LegalFooter onOpenLegal={openLegal} />
 
       {/* Modal Interactivo de Leyes */}
@@ -85,7 +97,7 @@ export default function Home() {
         initialTab={legalTab}
       />
 
-      {/* Botón Flotante de WhatsApp Business */}
+      {/* Botón Flotante de WhatsApp Business: 3001250524 */}
       <WhatsAppFloat />
 
     </div>

@@ -1,41 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --color-primary: #6366f1;
-  --color-secondary: #f59e0b;
-}
-
 html {
   scroll-behavior: smooth;
-  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  font-family: 'Nunito', system-ui, sans-serif;
 }
 
-/* Custom festive & clean scrollbars */
+h1, h2, h3, .font-display {
+  font-family: 'Fredoka', 'Nunito', sans-serif;
+  letter-spacing: -0.01em;
+}
+
+/* Custom festive & soft scrollbars */
 ::-webkit-scrollbar {
   width: 9px;
 }
 ::-webkit-scrollbar-track {
-  background: #f1f5f9;
+  background: #fdf4ff;
 }
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: #e879f9;
   border-radius: 6px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: #c026d3;
 }
 
-@keyframes floatGentle {
+/* Bubble floating gentle keyframes */
+@keyframes bubbleFloat {
   0%, 100% {
-    transform: translateY(0px);
+    transform: translateY(0px) rotate(0deg);
   }
   50% {
-    transform: translateY(-6px);
+    transform: translateY(-8px) rotate(2deg);
   }
 }
 
-.animate-float {
-  animation: floatGentle 4s ease-in-out infinite;
+.animate-bubble {
+  animation: bubbleFloat 4s ease-in-out infinite;
 }

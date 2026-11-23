@@ -8,29 +8,32 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        brand: {
-          50: '#fff7ed',
-          100: '#ffedd5',
-          200: '#fed7aa',
-          300: '#fdba74',
-          400: '#fb923c',
-          500: '#f97316', // Vibrant Orange
-          600: '#ea580c',
-          700: '#c2410c',
-          800: '#9a3412',
-          900: '#7c2d12',
+        theater: {
+          50: '#fdf4ff',
+          100: '#fae8ff',
+          200: '#f5d0fe',
+          300: '#f0abfc',
+          400: '#e879f9',
+          500: '#d946ef',
+          600: '#c026d3',
+          700: '#9c12d1', // La Teatrina Signature Magenta / Purple
+          800: '#86198f',
+          900: '#701a75',
         },
-        festive: {
-          purple: '#8B5CF6',
-          pink: '#EC4899',
-          yellow: '#FBBF24',
-          blue: '#3B82F6',
-          teal: '#14B8A6',
-          coral: '#FF6B6B'
+        sunny: {
+          400: '#fbbf24',
+          500: '#f59e0b',
+          600: '#d97706',
+        },
+        bubble: {
+          400: '#38bdf8',
+          500: '#0ea5e9',
+          600: '#0284c7',
         }
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        display: ['Fredoka', 'sans-serif'],
+        sans: ['Nunito', 'system-ui', 'sans-serif'],
       }
     },
   },

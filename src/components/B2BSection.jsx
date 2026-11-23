@@ -76,22 +76,22 @@ ${LEGAL_INFO.emailGeneral} o WhatsApp: ${LEGAL_INFO.whatsapp}`;
   };
 
   return (
-    <section id="empresas-conjuntos" className="py-20 bg-indigo-900 text-white relative overflow-hidden">
+    <section id="empresas-conjuntos" className="py-20 bg-gradient-to-br from-purple-950 via-purple-900 to-slate-900 text-white relative overflow-hidden">
       {/* Background soft glow */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-700/40 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-0 right-0 w-96 h-96 bg-purple-700/30 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header B2B */}
         <div className="max-w-3xl mb-12">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-800/80 border border-indigo-700 text-amber-300 text-xs font-black uppercase tracking-wider mb-4">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-800/80 border border-purple-700 text-amber-300 text-xs font-black uppercase tracking-wider mb-4 font-sans">
             <Building2 className="w-4 h-4" />
             <span>Exclusivo para Conjuntos Residenciales & Empresas (B2B)</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight">
-            Tranquilidad Total para Administradores de Conjuntos y Áreas de RRHH
+          <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight font-display">
+            Tranquilidad Total para Administradores de Copropiedades y RRHH
           </h2>
-          <p className="mt-3 text-indigo-100 text-sm sm:text-base leading-relaxed">
+          <p className="mt-3 text-purple-100 text-sm sm:text-base leading-relaxed font-sans">
             Sabemos que el Consejo de Administración y la Gerencia exigen formalidad absoluta. En <strong className="text-white">Imagin-ART-recreación</strong> entregamos toda la documentación tributaria y de seguridad social antes de iniciar cada evento.
           </p>
         </div>
@@ -100,43 +100,43 @@ ${LEGAL_INFO.emailGeneral} o WhatsApp: ${LEGAL_INFO.whatsapp}`;
           
           {/* Columna Izquierda: Documentación Entregada (7 cols) */}
           <div className="lg:col-span-7 space-y-4">
-            <h3 className="text-lg font-bold text-white mb-2 flex items-center gap-2">
+            <h3 className="text-lg font-bold text-white mb-2 flex items-center gap-2 font-display">
               <BadgeCheck className="w-5 h-5 text-emerald-400" />
               Documentación Legal y Laboral al Día
             </h3>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 font-sans">
               {b2bDocs.map((doc, idx) => (
                 <div
                   key={idx}
-                  className="bg-indigo-950/60 p-4 rounded-2xl border border-indigo-800 flex items-start gap-3 backdrop-blur-sm"
+                  className="bg-purple-950/70 p-4 rounded-2xl border border-purple-800 flex items-start gap-3 backdrop-blur-sm"
                 >
                   <div className="p-2 bg-emerald-500/20 text-emerald-300 rounded-xl flex-shrink-0 mt-0.5">
                     <CheckCircle2 className="w-4 h-4" />
                   </div>
                   <div>
                     <h4 className="text-xs font-bold text-white">{doc.title}</h4>
-                    <p className="text-[11px] text-indigo-200 mt-0.5 leading-snug">{doc.desc}</p>
+                    <p className="text-[11px] text-purple-200 mt-0.5 leading-snug">{doc.desc}</p>
                   </div>
                 </div>
               ))}
 
-              <div className="bg-indigo-950/60 p-4 rounded-2xl border border-indigo-800 flex items-start gap-3 backdrop-blur-sm">
+              <div className="bg-purple-950/70 p-4 rounded-2xl border border-purple-800 flex items-start gap-3 backdrop-blur-sm">
                 <div className="p-2 bg-amber-500/20 text-amber-300 rounded-xl flex-shrink-0 mt-0.5">
                   <Users2 className="w-4 h-4" />
                 </div>
                 <div>
                   <h4 className="text-xs font-bold text-white">Aforos de 30 a 800+ personas</h4>
-                  <p className="text-[11px] text-indigo-200 mt-0.5 leading-snug">Sonido profesional lineal y staff coordinado para eventos masivos.</p>
+                  <p className="text-[11px] text-purple-200 mt-0.5 leading-snug">Sonido profesional lineal y staff coordinado para eventos masivos.</p>
                 </div>
               </div>
             </div>
 
-            <div className="mt-6 p-4 rounded-2xl bg-indigo-950/70 border border-indigo-800 text-xs text-indigo-100">
+            <div className="mt-6 p-4 rounded-2xl bg-purple-950/80 border border-purple-800 text-xs text-purple-100 font-sans">
               <span className="font-bold text-amber-300 block mb-1">
                 📅 Fechas Clave para su Calendario en la Copropiedad:
               </span>
-              <p className="text-indigo-200 text-[11px]">
+              <p className="text-purple-200 text-[11px]">
                 Día del Niño (abril) • Vacaciones Recreativas (junio-julio) • Halloween Infantil (octubre) • Novenas y Cierre de Año (diciembre). 
                 <strong className="text-white"> ¡Reserve con anticipación para garantizar disponibilidad de inflables y recreadores!</strong>
               </p>
@@ -144,28 +144,28 @@ ${LEGAL_INFO.emailGeneral} o WhatsApp: ${LEGAL_INFO.whatsapp}`;
           </div>
 
           {/* Columna Derecha: Tarjeta de Descarga de Portafolio B2B (5 cols) */}
-          <div className="lg:col-span-5 bg-white text-slate-900 rounded-3xl p-6 sm:p-7 shadow-2xl relative">
-            <span className="text-[11px] font-bold text-indigo-600 uppercase tracking-wider block mb-1">
+          <div className="lg:col-span-5 bg-white text-slate-900 rounded-3xl p-6 sm:p-7 shadow-2xl relative font-sans">
+            <span className="text-[11px] font-bold text-purple-700 uppercase tracking-wider block mb-1">
               Ficha Técnica para Presentación al Consejo
             </span>
-            <h3 className="text-xl font-black text-slate-900 mb-3">
+            <h3 className="text-xl font-black text-slate-900 mb-3 font-display">
               Descargue Nuestro Portafolio Institucional
             </h3>
             <p className="text-xs text-slate-600 leading-relaxed mb-6">
-              Descargue la ficha técnica con fotos, especificaciones de inflables, requisitos eléctricos y cotizaciones corporativas tipo para someter a aprobación de junta o administración.
+              Descargue la ficha técnica con especificaciones de inflables, obras teatrales, requisitos eléctricos y cotizaciones corporativas tipo para someter a aprobación de junta o administración.
             </p>
 
             {/* Botón de Descarga */}
             <button
               onClick={handleDownloadPortfolio}
-              className="w-full py-3.5 px-4 bg-amber-400 hover:bg-amber-500 text-slate-950 font-black text-xs uppercase tracking-wider rounded-xl shadow-md transition flex items-center justify-center gap-2 mb-3"
+              className="w-full py-3.5 px-4 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs uppercase tracking-wider rounded-xl shadow-md transition flex items-center justify-center gap-2 mb-3 font-display"
             >
               <Download className="w-4 h-4 stroke-[2.5]" />
               <span>{downloadSuccess ? '✓ Portafolio Descargado' : 'Descargar Portafolio en PDF / Ficha'}</span>
             </button>
 
             {downloadSuccess && (
-              <p className="text-[11px] text-emerald-600 font-bold text-center mb-3">
+              <p className="text-[11px] text-emerald-600 font-bold text-center mb-3 font-sans">
                 Archivo descargado con éxito en su equipo.
               </p>
             )}
@@ -175,15 +175,11 @@ ${LEGAL_INFO.emailGeneral} o WhatsApp: ${LEGAL_INFO.whatsapp}`;
               href={`https://wa.me/${cleanWhatsAppNumber}?text=${encodeURIComponent('Hola Imagin-ART-recreación, soy administrador de copropiedad / encargado de RRHH y requiero una propuesta formal para un evento en Bogotá.')}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full py-3 px-4 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-xl transition flex items-center justify-center gap-2 shadow-sm"
+              className="w-full py-3 px-4 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-xl transition flex items-center justify-center gap-2 shadow-sm font-sans"
             >
               <MessageCircle className="w-4 h-4 fill-current" />
-              <span>Atención Prioritaria B2B (300 125 0524)</span>
+              <span>Contactar Asesor B2B por WhatsApp</span>
             </a>
-
-            <p className="text-[10px] text-slate-400 text-center mt-3">
-              Atención a Consejos de Administración, Comités de Convivencia y Talento Humano.
-            </p>
           </div>
 
         </div>
